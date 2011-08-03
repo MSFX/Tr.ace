@@ -30,6 +30,5 @@ The main functions are:
 
 Please view the docs for more information.
 
-Matt Stuttard
-MSFX Ltd
+MSFX Matt Stuttard
 http://msfx.co.uk

@@ -1,7 +1,7 @@
 ﻿/**
  * Tr.ace() Example Code by MSFX Matt Stuttard
  * Version 1.1 
- * 02.08.2011
+ * 03.08.2011
  * 
  * Copyright (c) MSFX Matt Stuttard
  * 
