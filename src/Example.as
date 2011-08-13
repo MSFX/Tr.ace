@@ -1,7 +1,7 @@
 ﻿/**
  * Tr.ace() Example Code by MSFX Matt Stuttard
- * Version 1.1 
- * 03.08.2011
+ * Version 1.3
+ * 13.08.2011
  * 
  * Copyright (c) MSFX Matt Stuttard
  * 
@@ -71,12 +71,24 @@ package
 			// uncomment to restrict the trace output from the 'Example' and 'AnotherTestClass' Classes only
 			//Tr.restrictToClasses = [Example, AnotherTestClass];
 			
+			// uncomment to ignore the trace output from the 'Example' Class only
+			//Tr.ignoreClasses = [Example];
+			
+			// uncomment to ignore the trace output from the 'Example' and 'AnotherTestClass' Classes only
+			//Tr.ignoreClasses = [Example, AnotherTestClass];
+			
 			
 			// uncomment to restrict the trace output from user 'MATT' only
 			//Tr.restrictToUsers = [Tr.MATT];
 			
 			// uncomment to restrict the trace output from user 'MATT' AND 'DEFAULT' only
 			//Tr.restrictToUsers = [Tr.MATT, Tr.DEFAULT];
+			
+			// uncomment to ignore the trace output from user 'MATT' only
+			//Tr.ignoreUsers = [Tr.MATT];
+			
+			// uncomment to ignore the trace output from user 'MATT' AND 'DEFAULT' only
+			//Tr.ignoreUsers = [Tr.MATT, Tr.DEFAULT];
 			
 			
 			// uncomment to show the time with each trace

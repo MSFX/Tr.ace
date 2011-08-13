@@ -1,7 +1,7 @@
 /**
  * Tr.ace() by MSFX Matt Stuttard
- * Version 1.1
- * 03.08.2011
+ * Version 1.0 
+ * 29.07.2011
  * 
  * Copyright (c) MSFX Matt Stuttard
  * 
@@ -55,7 +55,9 @@ package uk.msfx.utils.tracing
 		private static var _copyToClipboard:Boolean;
 		private static var _off:Boolean;
 		private static var _restrictToClasses:Array;
+		private static var _ignoreClasses:Array;
 		private static var _restrictToUsers:Array;
+		private static var _ignoreUsers:Array;
 		private static var _useTimeStamp:Boolean;
 		private static var _useLineBreaks:Boolean;
 		
@@ -190,6 +192,41 @@ package uk.msfx.utils.tracing
 		 */
 		static public function get copyToClipboard():Boolean { return core.copyToClipboard; }
 		
+		
+		
+		/**
+		 * An Array of Classes (Class) that you wish the output to ignore
+		 * 
+		 * <p>Example:</p>
+		 * 
+		 * <p>To ignore the output from only your <code>Main</code> class you would use the following:</p>
+		 * 
+		 * <p><code>Tr.v = [Main];</code></p>
+		 * 
+		 * <p>or to ignore from multiple classes</p>
+		 * 
+		 * <p><code>Tr.ignoreClasses = [ClassName1, ClassName2];</code></p>
+		 */
+		static public function get ignoreClasses():Array { return core.ignoreClasses; }
+		
+		
+		
+		/**
+		 * An Array of Users (String) that you wish the output to ignore
+		 * 
+		 * <p>Example:</p>
+		 * 
+		 * <p>To ignore the output from the <code>DEFAULT</code> user you would use the following:</p>
+		 * 
+		 * <p><code>Tr.v = [Tr.DEFAULT];</code></p>
+		 * 
+		 * <p>or to ignore from multiple users</p>
+		 * 
+		 * <p><code>Tr.ignoreClasses = [Tr.DEFAULT, TR.MATT];</code></p>
+		 */
+		static public function get ignoreUsers():Array { return core.ignoreUsers; }
+		
+		
 		/**
 		 * Toggle whether the output is on or off
 		 */
@@ -217,11 +254,11 @@ package uk.msfx.utils.tracing
 		 * 
 		 * <p>To restrict the output from the <b>DEFAULT</b> user you would use the following:</p>
 		 * 
-		 * <p><code>Tr.restrictToClasses = [Tr.DEFAULT];</code></p>
+		 * <p><code>Tr.restrictToUsers = [Tr.DEFAULT];</code></p>
 		 * 
-		 * <p>or to restrict to multiple users</p>
+		 * <p>To restrict to multiple users you would simply do this:</p>
 		 * 
-		 * <p><code>Tr.restrictToClasses = [UserName1, UserName2];</code></p>
+		 * <p><code>Tr.restrictToUsers = [UserName1, UserName2];</code></p>
 		 * 
 		 * <p><b>NB:</b> I suggest you add your username(s) to this class rather than entering a String each time (removing the risk of typos).</p>
 		 */
@@ -258,6 +295,12 @@ package uk.msfx.utils.tracing
 		
 		/** @private */
 		static public function set useLineBreaks(value:Boolean):void { core.useLineBreaks = value; }
+		
+		/** @private */
+		static public function set ignoreClasses(value:Array):void { core.ignoreClasses = value; }
+		
+		/** @private */
+		static public function set ignoreUsers(value:Array):void { core.ignoreUsers = value; }
 		
 	}
 }

@@ -1,7 +1,7 @@
 /**
  * Tr.ace() by MSFX Matt Stuttard
- * Version 1.1
- * 03.08.2011
+ * Version 1.0 
+ * 29.07.2011
  * 
  * Copyright (c) MSFX Matt Stuttard
  * 
@@ -61,6 +61,12 @@ package uk.msfx.utils.tracing
 		/** @private */
 		internal var restrictToClassesNo:int;
 		
+		/** @private */
+		private var _ignoreClasses:Array;
+		
+		/** @private */
+		internal var ignoreClassesNo:int;
+		
 		/**
 		 * @private
 		 * Using Array (not Vector of String) to allow support for FP9
@@ -69,6 +75,12 @@ package uk.msfx.utils.tracing
 		
 		/** @private */
 		internal var restrictToUsersNo:int;
+		
+		/** @private */
+		private var _ignoreUsers:Array;
+		
+		/** @private */
+		internal var ignoreUsersNo:int;
 		
 		/** @private */
 		private var date:Date;
@@ -242,6 +254,12 @@ package uk.msfx.utils.tracing
 			// if there are restrictions on which classes to trace from test for match, else kill the function
 			if (restrictToClassesNo > 0 && restrictToClasses.indexOf(withinClass) < 0) return;
 			
+			// if there are classes to ignore output from test for match, if positive kill the function
+			if (ignoreClassesNo > 0 && ignoreClasses.indexOf(withinClass) >= 0) return;
+			
+			// if there are users to ignore output from test for match, if positive kill the function
+			if (ignoreUsersNo > 0 && ignoreUsers.indexOf(user) >= 0) return;
+			
 			// output variable
 			var traceStr:String = "";
 			
@@ -327,6 +345,12 @@ package uk.msfx.utils.tracing
 		
 		
 		/** @private */
+		public function get ignoreClasses():Array { return _ignoreClasses; }
+		
+		/** @private */
+		public function get ignoreUsers():Array { return _ignoreUsers; }
+		
+		/** @private */
 		public static function get instance() : TrCore { return _instance; }
         
 		/** @private */
@@ -355,6 +379,24 @@ package uk.msfx.utils.tracing
 			
 			// update the number of users restricted to
 			restrictToUsersNo = _restrictToUsers.length;
+		}
+		
+		/** @private */
+		public function set ignoreClasses(value:Array):void 
+		{
+			_ignoreClasses = value;
+			
+			// update the number of classes ignored
+			ignoreClassesNo = _ignoreClasses.length;
+		}
+		
+		/** @private */
+		public function set ignoreUsers(value:Array):void 
+		{
+			_ignoreUsers = value;
+			
+			// update the number of users ignored
+			ignoreUsersNo = _ignoreUsers.length;
 		}
 		
 	}
