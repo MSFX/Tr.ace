@@ -15,7 +15,8 @@
   </output>
   <!-- Other classes to be compiled into your SWF -->
   <classpaths>
-    <class path="src" />
+    <class path="src\fp9" />
+    <class path="src\fp10" />
   </classpaths>
   <!-- Build options -->
   <build>
@@ -70,7 +71,7 @@
   </library>
   <!-- Class files to compile (other referenced classes will automatically be included) -->
   <compileTargets>
-    <compile path="src\Example.as" />
+    <compile path="src\fp10\ExampleMain.as" />
   </compileTargets>
   <!-- Paths to exclude from the Project Explorer tree -->
   <hiddenPaths>

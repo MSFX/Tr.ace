@@ -1,4 +1,4 @@
-Tr.ace() is a library for managing trace statements within AS3.
+Tr.ace() is a library for formatting and managing trace statements within AS3.
 
 Tr.ace() is a static Class that uses the Singleton design pattern so you only need to define it's settings once within your application and you're all set.
 
@@ -6,7 +6,7 @@ With Tr.ace() you can manage all your output statements, restricting or ignoring
 
 The output using Tr.ace() can also be formatted with timestamps, linebreaks, the name of the user tracing, the Class the trace resides within and can be automatically copied to the clipboard.
 
-For those using FlashDevelop you can prefix your username with "0:", "1:", "2:", "3:", or "4:" to trace in a different colour within the FlashDevelop output console, as shown with the 'FLASH_DEVELOP' usernam
+For those using FlashDevelop you can prefix your username with "0:", "1:", "2:", "3:", or "4:" to trace in a different colour within the FlashDevelop output console, as shown with the 'FLASH_DEVELOP' username
 
 
 The main functions are:
@@ -28,7 +28,8 @@ The main functions are:
 - For formatting multiple arguments
 
 
-Please view the docs for more information.
+Please view the docs for more information - http://docs.msfx.co.uk/as3/trace/
 
-MSFX Matt Stuttard
+
+MSFX Matt Stuttard Parker
 http://msfx.co.uk

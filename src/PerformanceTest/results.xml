@@ -1,0 +1,35 @@
+<TestCollection playerVersion="WIN 10,1,52,14" isDebugger="true" playerType="External" os="Windows 7" manufacturer="Adobe Windows" cpuArchitecture="x86">
+	
+	<TestSuite name="TraceTest" time="669" tareTime="0" initTime="0" description="Comparing Trace Methods. 10000 loops." error="false">
+		
+		<MethodTest name="ClassName" time="43.8" min="41" max="46" deviation="0.114" description="using object" memory="60" retainedMemory="0">
+			<iteration time="46" memory="64" retainedMemory="0"/>
+			<iteration time="45" memory="60" retainedMemory="0"/>
+			<iteration time="43" memory="60" retainedMemory="4"/>
+			<iteration time="41" memory="60" retainedMemory="0"/>
+		</MethodTest>
+		
+		<MethodTest name="Object(this).constructor" time="49.5" min="48" max="52" deviation="0.081" description="using object" memory="1091" retainedMemory="1026">
+			<iteration time="52" memory="68" retainedMemory="-4"/>
+			<iteration time="48" memory="4172" retainedMemory="4108"/>
+			<iteration time="49" memory="64" retainedMemory="0"/>
+			<iteration time="49" memory="64" retainedMemory="0"/>
+		</MethodTest>
+		
+		<MethodTest name="Class(getDefinitionByName(getQualifiedClassName(this)))" time="52.5" min="52" max="54" deviation="0.038" description="using object" memory="55" retainedMemory="1">
+			<iteration time="54" memory="64" retainedMemory="-4"/>
+			<iteration time="52" memory="52" retainedMemory="4"/>
+			<iteration time="52" memory="52" retainedMemory="4"/>
+			<iteration time="52" memory="52" retainedMemory="4"/>
+		</MethodTest>
+		
+		<MethodTest name="this" time="525.8" min="507" max="545" deviation="0.072" description="using this" memory="4298" retainedMemory="4181">
+			<iteration time="507" memory="4272" retainedMemory="4184"/>
+			<iteration time="523" memory="4252" retainedMemory="4148"/>
+			<iteration time="528" memory="4288" retainedMemory="4188"/>
+			<iteration time="545" memory="4384" retainedMemory="4208"/>
+		</MethodTest>
+		
+	</TestSuite>
+	
+</TestCollection>
