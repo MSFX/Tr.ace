@@ -31,6 +31,7 @@
  **/
 package uk.msfx.utils.tracing.fp9
 {
+	import flash.text.TextField;
 	import uk.msfx.utils.tracing.core.TrCore;
 	
 	/**
@@ -60,7 +61,7 @@ package uk.msfx.utils.tracing.fp9
 		// variables to tailor the output
 		private static var _arrayAndObjectLinebreaks:Boolean;
 		//private static var _copyToClipboard:Boolean;
-		private static var _off:Boolean;
+		private static var _enabled:Boolean;
 		private static var _restrictToClasses:Array;
 		private static var _ignoreClasses:Array;
 		private static var _restrictToUsers:Array;
@@ -92,7 +93,7 @@ package uk.msfx.utils.tracing.fp9
 		public static function ace(output:*, user:String, withinClass:*):void 
 		{
 			// trace the output to the console if tracing is on
-			if (!core.off) core.out(output, user, withinClass);
+			if (!core.enabled) core.out(output, user, withinClass);
 		}
 		
 		/**
@@ -112,7 +113,7 @@ package uk.msfx.utils.tracing.fp9
 		public static function aceArray(output:Array, user:String, withinClass:*):void 
 		{
 			// trace the output to the console if tracing is on
-			if (!core.off) core.outArray(output, user, withinClass);
+			if (!core.enabled) core.outArray(output, user, withinClass);
 		}
 		
 		/**
@@ -131,7 +132,7 @@ package uk.msfx.utils.tracing.fp9
 		 */
 		public static function aceObject(output:Object, user:String, withinClass:*):void 
 		{
-			if (!core.off) core.outObject(output, user, withinClass);
+			if (!core.enabled) core.outObject(output, user, withinClass);
 		}
 		
 		
@@ -150,7 +151,7 @@ package uk.msfx.utils.tracing.fp9
 		 */
 		public static function aceMulti(user:String, withinClass:*, ...values):void 
 		{
-			if (!core.off) core.outMulti(values, user, withinClass);
+			if (!core.enabled) core.outMulti(values, user, withinClass);
 		}
 		
 		/**
@@ -163,6 +164,12 @@ package uk.msfx.utils.tracing.fp9
 		 * Toggle whether the output is automatically updated to the clipboard.
 		 */
 		//static public function get copyToClipboard():Boolean { return core.copyToClipboard; }
+		
+		
+		/**
+		 * Assign a Textfield as a "console" to output the traces to
+		 */
+		static public function get console():TextField{ return core.console; }
 		
 		
 		
@@ -202,7 +209,7 @@ package uk.msfx.utils.tracing.fp9
 		/**
 		 * Toggle whether the output is on or off.
 		 */
-		static public function get off():Boolean { return core.off; }
+		static public function get enabled():Boolean { return core.enabled; }
 		
 		/**
 		 * An Array of Classes (Class) that you wish the output to be restricted to.
@@ -254,7 +261,10 @@ package uk.msfx.utils.tracing.fp9
 		//static public function set copyToClipboard(value:Boolean):void { core.copyToClipboard = value; }
 		
 		/** @private */
-		static public function set off(value:Boolean):void { core.off = value; }
+		static public function set console(value:TextField):void { core.console = value; }
+		
+		/** @private */
+		static public function set enabled(value:Boolean):void { core.enabled = value; }
 		
 		/** @private */
 		static public function set restrictToClasses(value:Array):void { core.restrictToClasses = value; }

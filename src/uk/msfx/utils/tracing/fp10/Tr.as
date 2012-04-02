@@ -31,6 +31,8 @@
  **/
 package uk.msfx.utils.tracing.fp10
 {
+	import flash.net.FileReference;
+	import flash.text.TextField;
 	import uk.msfx.utils.tracing.core.TrCoreFP10;
 	
 	/**
@@ -57,14 +59,18 @@ package uk.msfx.utils.tracing.fp10
 		
 		// variables to tailor the output
 		private static var _arrayAndObjectLinebreaks:Boolean;
+		private static var _console:TextField;
 		private static var _copyToClipboard:Boolean;
-		private static var _off:Boolean;
+		private static var _enabled:Boolean;
 		private static var _restrictToClasses:Array;
 		private static var _ignoreClasses:Array;
 		private static var _restrictToUsers:Array;
 		private static var _ignoreUsers:Array;
 		private static var _useTimeStamp:Boolean;
 		private static var _useLineBreaks:Boolean;
+		
+		// file reference variable used to save log with
+		protected static var file:FileReference;
 		
 		
 		/**
@@ -90,7 +96,7 @@ package uk.msfx.utils.tracing.fp10
 		public static function ace(output:*, user:String, withinClass:*):void 
 		{
 			// trace the output to the console if tracing is on
-			if (!core.off) core.out(output, user, withinClass);
+			if (!core.enabled) core.out(output, user, withinClass);
 		}
 		
 		/**
@@ -110,7 +116,7 @@ package uk.msfx.utils.tracing.fp10
 		public static function aceArray(output:Array, user:String, withinClass:*):void 
 		{
 			// trace the output to the console if tracing is on
-			if (!core.off) core.outArray(output, user, withinClass);
+			if (!core.enabled) core.outArray(output, user, withinClass);
 		}
 		
 		/**
@@ -129,7 +135,7 @@ package uk.msfx.utils.tracing.fp10
 		 */
 		public static function aceObject(output:Object, user:String, withinClass:*):void 
 		{
-			if (!core.off) core.outObject(output, user, withinClass);
+			if (!core.enabled) core.outObject(output, user, withinClass);
 		}
 		
 		
@@ -148,7 +154,27 @@ package uk.msfx.utils.tracing.fp10
 		 */
 		public static function aceMulti(user:String, withinClass:*, ...values):void 
 		{
-			if (!core.off) core.outMulti(values, user, withinClass);
+			if (!core.enabled) core.outMulti(values, user, withinClass);
+		}
+		
+		/**
+		 * Save the current Tr.ace(...) log out to a text file
+		 * 
+		 * <p>Log file will be time stamped by default </p>
+		 */
+		public static function saveLog():void 
+		{
+			// create data
+			var date:Date = new Date();
+			
+			// generate filename
+			var filename:String = "TRACE-LOG-" + ((date.date < 10)? "0" + date.date : date.date) + "-" + (((date.month + 1) < 10)? "0" + (date.month + 1) : date.month) + "-" + date.fullYear + "-" + ((date.hours < 10)? "0" + date.hours : date.hours) + ((date.minutes < 10)? "0" + date.minutes : date.minutes) + ".txt";
+			
+			// create new file reference
+			file = new FileReference();
+			
+			// save the log file from from the core as the filename above
+			file.save(core.log, filename);
 		}
 		
 		/**
@@ -158,10 +184,15 @@ package uk.msfx.utils.tracing.fp10
 		
 		
 		/**
+		 * Assign a Textfield as a "console" to output the traces to
+		 */
+		static public function get console():TextField{ return core.console; }
+		
+		
+		/**
 		 * Toggle whether the output is automatically updated to the clipboard.
 		 */
 		static public function get copyToClipboard():Boolean { return core.copyToClipboard; }
-		
 		
 		
 		/**
@@ -200,7 +231,7 @@ package uk.msfx.utils.tracing.fp10
 		/**
 		 * Toggle whether the output is on or off.
 		 */
-		static public function get off():Boolean { return core.off; }
+		static public function get enabled():Boolean { return core.enabled; }
 		
 		/**
 		 * An Array of Classes (Class) that you wish the output to be restricted to.
@@ -249,10 +280,19 @@ package uk.msfx.utils.tracing.fp10
 		static public function set arrayAndObjectLinebreaks(value:Boolean):void { core.arrayAndObjectLinebreaks = value; }
 		
 		/** @private */
+		static public function set console(value:TextField):void { core.console = value; }
+		
+		/** @private */
 		static public function set copyToClipboard(value:Boolean):void { core.copyToClipboard = value; }
 		
 		/** @private */
-		static public function set off(value:Boolean):void { core.off = value; }
+		static public function set enabled(value:Boolean):void { core.enabled = value; }
+		
+		/** @private */
+		static public function set ignoreClasses(value:Array):void { core.ignoreClasses = value; }
+		
+		/** @private */
+		static public function set ignoreUsers(value:Array):void { core.ignoreUsers = value; }
 		
 		/** @private */
 		static public function set restrictToClasses(value:Array):void { core.restrictToClasses = value; }
@@ -265,12 +305,6 @@ package uk.msfx.utils.tracing.fp10
 		
 		/** @private */
 		static public function set useLineBreaks(value:Boolean):void { core.useLineBreaks = value; }
-		
-		/** @private */
-		static public function set ignoreClasses(value:Array):void { core.ignoreClasses = value; }
-		
-		/** @private */
-		static public function set ignoreUsers(value:Array):void { core.ignoreUsers = value; }
 		
 	}
 }

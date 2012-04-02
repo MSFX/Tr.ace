@@ -1,7 +1,7 @@
 /**
  * Tr.ace() by MSFX Matt Stuttard Parker
- * Version 1.2
- * 06.09.2011
+ * Version 1.3
+ * 02.04.2012
  * 
  * Copyright (c) MSFX Matt Stuttard Parker
  * 
@@ -31,6 +31,7 @@
  **/
 package uk.msfx.utils.tracing.core
 {
+	import flash.text.TextField;
 	/**
 	 * A 'Singleton Class' to store the settings across the Tr.ace() library.
 	 * 
@@ -52,9 +53,19 @@ package uk.msfx.utils.tracing.core
 		public var arrayAndObjectLinebreaks:Boolean;
 		
 		/**
+		 * Textfield to print the output into
+		 */
+		public var console:TextField
+		
+		/**
 		 * Toggle whether the output is automatically updated to the clipboard.
 		 */
 		public var copyToClipboard:Boolean;
+		
+		/**
+		 * Toggle whether the output is on or off.
+		 */
+		public var enabled:Boolean;
 		
 		/**
 		 * An Array of Classes (Class) that you wish the output to ignore.
@@ -65,11 +76,6 @@ package uk.msfx.utils.tracing.core
 		 * An Array of Users (String) that you wish the output to ignore.
 		 */
 		public var ignoreUsers:Array = [];
-		
-		/**
-		 * Toggle whether the output is on or off.
-		 */
-		public var off:Boolean;
 		
 		/**
 		 * An Array of Classes (Class) that you wish the output to be restricted to.

@@ -16,18 +16,18 @@
     </define>
     <define append="true">
       <name>CONFIG::timeStamp</name>
-      <value>'06/09/2011'</value>
+      <value>'02/04/2012'</value>
     </define>
     <verbose-stacktraces>true</verbose-stacktraces>
     <source-path append="true">
-      <path-element>F:\My Dropbox\projects\Tr.ace\src\fp9</path-element>
-      <path-element>F:\My Dropbox\projects\Tr.ace\src\fp10</path-element>
-      <path-element>F:\My Dropbox\flash\classes</path-element>
+      <path-element>C:\My Dropbox\projects\Tr.ace\src\fp9</path-element>
+      <path-element>C:\My Dropbox\projects\Tr.ace\src\fp10</path-element>
+      <path-element>C:\My Dropbox\flash\classes</path-element>
       <path-element>C:\Program Files (x86)\FlashDevelop\Library\AS3\classes</path-element>
     </source-path>
   </compiler>
   <file-specs>
-    <path-element>F:\My Dropbox\projects\Tr.ace\src\fp10\ExampleMain.as</path-element>
+    <path-element>C:\My Dropbox\projects\Tr.ace\src\fp10\ExampleMain.as</path-element>
   </file-specs>
   <default-background-color>#FFFFFF</default-background-color>
   <default-frame-rate>30</default-frame-rate>

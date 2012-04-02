@@ -55,11 +55,11 @@ package uk.msfx.utils.tracing.core
 		 * 
 		 * <p>Extended to provide Clipboard functionality.</p>
 		 * 
-		 * @param	output 			The output that you wish to trace to the console
-		 * @param	user 			The name of the user tracing the output
-		 * @param	withinClass		The name of the Class the output is being traced from
-		 * @param	startWithLineBreak Whether to start the trace with a line break
-		 * @param	endWithLineBreak Whether to end the trace with a line break
+		 * @param	output 					The output that you wish to trace to the console
+		 * @param	user 					The name of the user tracing the output
+		 * @param	withinClass				The name of the Class the output is being traced from
+		 * @param	startWithLineBreak 		Whether to start the trace with a line break
+		 * @param	endWithLineBreak 		Whether to end the trace with a line break
 		 */
 		override public function out(output:*, user:String, withinClass:*, startWithLineBreak:Boolean = false, endWithLineBreak:Boolean = false):void 
 		{

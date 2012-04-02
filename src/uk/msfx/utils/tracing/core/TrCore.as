@@ -1,7 +1,7 @@
 /**
  * Tr.ace() by MSFX Matt Stuttard Parker
  * Version 1.3
- * 06.09.2011
+ * 02.04.2012
  * 
  * Copyright (c) MSFX Matt Stuttard Parker
  * 
@@ -31,6 +31,7 @@
  **/
 package uk.msfx.utils.tracing.core
 {
+	import flash.text.TextField;
 	import flash.utils.getQualifiedClassName;
 	
 	/**
@@ -50,10 +51,16 @@ package uk.msfx.utils.tracing.core
 		private var _arrayAndObjectLinebreaks:Boolean = false;
 		
 		/** @private */
+		protected var clipboardText:String = "";
+		
+		/** @private */
+		protected var _console:TextField;
+		
+		/** @private */
 		protected var _copyToClipboard:Boolean = false;
 		
 		/** @private */
-		protected var clipboardText:String = "";
+		private var _enabled:Boolean = false;
 		
 		/** @private */
 		protected var _ignoreClasses:Array;
@@ -68,7 +75,7 @@ package uk.msfx.utils.tracing.core
 		protected var ignoreUsersNo:int;
 		
 		/** @private */
-		private var _off:Boolean = false;
+		private var _log:String = "";
 		
 		/** @private */
 		protected var _restrictToClasses:Array;
@@ -83,10 +90,10 @@ package uk.msfx.utils.tracing.core
 		protected var restrictToUsersNo:int;
 		
 		/** @private */
-		private var _useLineBreaks:Boolean = false;
+		protected var _useLineBreaks:Boolean = false;
 		
 		/** @private */
-		private var _useTimeStamp:Boolean = false;
+		protected var _useTimeStamp:Boolean = false;
 		
 		
 		// for adding the timestamp
@@ -118,7 +125,7 @@ package uk.msfx.utils.tracing.core
 			useLineBreaks = settings.useLineBreaks
 			arrayAndObjectLinebreaks = settings.arrayAndObjectLinebreaks;
 			
-			off = settings.off;
+			enabled = settings.enabled;
 			
 			// initialize the date
 			date = new Date();
@@ -181,9 +188,9 @@ package uk.msfx.utils.tracing.core
 		/**
 		 * Function to trace multiple values out, seperated by commas.
 		 * 
-		 * @param	values Array of values to be traced out
-		 * @param	user
-		 * @param	withinClass
+		 * @param	values 			Array of values to be traced out
+		 * @param	user			The user tracing the values
+		 * @param	withinClass		The class being traced from
 		 */
 		public function outMulti(values:Array, user:String, withinClass:*):void 
 		{
@@ -262,11 +269,11 @@ package uk.msfx.utils.tracing.core
 		/**
 		 * Function to format and trace to the output console.
 		 * 
-		 * @param	output 			The output that you wish to trace to the console
-		 * @param	user 			The name of the user tracing the output
-		 * @param	withinClass		The name of the Class the output is being traced from
-		 * @param	startWithLineBreak Whether to start the trace with a line break
-		 * @param	endWithLineBreak Whether to end the trace with a line break
+		 * @param	output 					The output that you wish to trace to the console
+		 * @param	user 					The name of the user tracing the output
+		 * @param	withinClass				The name of the Class the output is being traced from
+		 * @param	startWithLineBreak 		Whether to start the trace with a line break
+		 * @param	endWithLineBreak 		Whether to end the trace with a line break
 		 */
 		public function out(output:*, user:String, withinClass:*, startWithLineBreak:Boolean = false, endWithLineBreak:Boolean = false):void 
 		{
@@ -303,8 +310,15 @@ package uk.msfx.utils.tracing.core
 					// trace the users output
 					trace(traceStr + output);
 					
-					// update the clipboard if on
-					if (_copyToClipboard) clipboardText += (traceStr + output) + "\n";
+					// update log
+					//_log += ((traceStr + output) + "\n");
+					_log += ((traceStr + output) + String.fromCharCode(13));
+					
+					// update the clipboard if enabled
+					if (_copyToClipboard) clipboardText = _log;
+					
+					// push out to the console if enabled
+					if (_console) _console.appendText(traceStr + output + "\n");
 				}
 			}
 			else 
@@ -312,8 +326,15 @@ package uk.msfx.utils.tracing.core
 				// otherwise just trace every users output
 				trace(traceStr + output);
 				
-				// update the clipboard if on
-				if (_copyToClipboard) clipboardText += (traceStr + output) + "\n";
+				// update log
+				//_log += ((traceStr + output) + "\n");
+				_log += ((traceStr + output) + String.fromCharCode(13));
+				
+				// update the clipboard if enabled
+				if (_copyToClipboard) clipboardText = _log;
+				
+				// push out to the console if enabled
+				if (_console) _console.appendText(traceStr + output + "\n");
 			}
 			
 			// toggle for linebreaks
@@ -321,8 +342,14 @@ package uk.msfx.utils.tracing.core
 			{
 				trace("");
 				
-				// update the clipboard if on
+				// update log
+				_log += "\n";
+				
+				// update the clipboard if enabled
 				if (_copyToClipboard) clipboardText += "\n";
+				
+				// update the console if enabled
+				if (_console) _console.appendText("\n");
 			}
 			
 			// add initial linebreak if toggled on
@@ -330,8 +357,14 @@ package uk.msfx.utils.tracing.core
 			{
 				trace("");
 				
-				// update the clipboard if on
+				// update log
+				_log += "\n";
+				
+				// update the clipboard if enabled
 				if (_copyToClipboard) clipboardText += "\n";
+				
+				// update the console if enabled
+				if (_console) _console.appendText("\n");
 			}
 		}
 		
@@ -340,13 +373,19 @@ package uk.msfx.utils.tracing.core
 		public function get arrayAndObjectLinebreaks():Boolean { return settings.arrayAndObjectLinebreaks; }
 		
 		/** @private */
+		public function get console():TextField { return settings.console; }
+		
+		/** @private */
 		public function get ignoreClasses():Array { return settings.ignoreClasses; }
 		
 		/** @private */
 		public function get ignoreUsers():Array { return settings.ignoreUsers; }
 		
 		/** @private */
-		public function get off():Boolean { return settings.off; }
+		public function get enabled():Boolean { return settings.enabled; }
+		
+		/** @private */
+		public function get log():String { return _log; }
 		
 		/** @private */
 		public function get restrictToClasses():Array { return settings.restrictToClasses; }
@@ -365,13 +404,16 @@ package uk.msfx.utils.tracing.core
 		public function set arrayAndObjectLinebreaks(value:Boolean):void { settings.arrayAndObjectLinebreaks = _arrayAndObjectLinebreaks = value; }
 		
 		/** @private */
+		public function set console(value:TextField):void { settings.console = _console = value; }
+		
+		/** @private */
 		public function set ignoreClasses(value:Array):void { settings.ignoreClasses = _ignoreClasses = value; }
 		
 		/** @private */
 		public function set ignoreUsers(value:Array):void { settings.ignoreUsers = _ignoreUsers = value; }
 		
 		/** @private */
-		public function set off(value:Boolean):void { settings.off = _off = value; }
+		public function set enabled(value:Boolean):void { settings.enabled = _enabled = value; }
 		
 		/** @private */
 		public function set restrictToClasses(value:Array):void { settings.restrictToClasses = _restrictToClasses = value; }

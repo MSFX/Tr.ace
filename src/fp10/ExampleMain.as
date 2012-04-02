@@ -33,6 +33,8 @@ package
 {
 	import flash.display.Sprite;
 	import flash.events.Event;
+	import flash.net.FileReference;
+	import flash.text.TextField;
 	import uk.msfx.utils.tracing.fp10.Tr;
 	import uk.msfx.utils.tracing.users.TrUsers;
 	
@@ -67,8 +69,6 @@ package
 		{
 			// remove event listener
 			removeEventListener(Event.ADDED_TO_STAGE, init);
-			
-			
 			
 			/**
 			 * Welcome to the Tr.ace() Example!
@@ -114,8 +114,18 @@ package
 			// uncomment to add linebreaks between each output
 			//Tr.useLineBreaks = true;
 			
+			// create a textfield
+			var textfield:TextField = new TextField();
+			textfield.width = stage.stageWidth;
+			textfield.height = stage.stageHeight;
+			addChild(textfield);
+			
+			// uncomment to output to the textfield
+			Tr.console = textfield;
+			
+			
 			// uncomment to switch tracing off entirely
-			//Tr.off = true;
+			//Tr.enabled = false;
 			
 			
 			
@@ -227,6 +237,10 @@ package
 			// trace an unlimited number of arguments seperated via commas
 			//Tr.aceMulti(TrUsers.MSFX, Object(this).constructor, test, one + two, ["a", "b", "c", "d"], obj);
 			
+			
+			
+			// uncomment to save log as textfile
+			Tr.saveLog();
 		}
 		
 	}
