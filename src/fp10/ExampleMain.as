@@ -114,14 +114,16 @@ package
 			// uncomment to add linebreaks between each output
 			//Tr.useLineBreaks = true;
 			
-			// create a textfield
+			// create a textfield to use as the "console"
 			var textfield:TextField = new TextField();
 			textfield.width = stage.stageWidth;
 			textfield.height = stage.stageHeight;
 			addChild(textfield);
 			
-			// uncomment to output to the textfield
-			Tr.console = textfield;
+			// uncomment to output all the traces to the textfield
+			//Tr.console = textfield;
+			
+			// to preview the new 'log' feature, uncomment the line at the bottom of this function (line ~245)
 			
 			
 			// uncomment to switch tracing off entirely
@@ -240,7 +242,7 @@ package
 			
 			
 			// uncomment to save log as textfile
-			Tr.saveLog();
+			//Tr.saveLog();
 		}
 		
 	}
