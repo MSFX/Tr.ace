@@ -1,6 +1,6 @@
 /**
  * Tr.ace() by MSFX Matt Stuttard Parker
- * Version 1.3
+ * Version 1.4
  * 02.04.2012
  * 
  * Copyright (c) MSFX Matt Stuttard Parker

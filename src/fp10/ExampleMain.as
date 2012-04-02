@@ -1,7 +1,7 @@
 ﻿/**
  * Tr.ace() Example Code by MSFX Matt Stuttard
- * Version 1.3
- * 06.09.2011
+ * Version 1.4
+ * 02.04.2012
  * 
  * Copyright (c) MSFX Matt Stuttard Parker
  * 
@@ -41,7 +41,7 @@ package
 	/**
 	 * This is an Example Class for demonstrating Tr.ace().  
 	 * 
-	 * You can publish this Class on its own or via the ExampleMain FLA included (CS4 + CS5).
+	 * You can publish this Class on its own or via the ExampleMain FLA included (CS4 + CS5 + CS5.5).
 	 * 
 	 * @author MSFX Matt Stuttard Parker
 	 */

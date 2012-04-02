@@ -1,7 +1,7 @@
 /**
  * Tr.ace() by MSFX Matt Stuttard Parker
- * Version 1.2
- * 04.09.2011
+ * Version 1.4
+ * 02.04.2012
  * 
  * Copyright (c) MSFX Matt Stuttard Parker
  * 
@@ -49,6 +49,10 @@ package uk.msfx.utils.tracing.fp10
 	 * <p><b>UPDATE 1.1:</b>  The Tr.ace() library has been extended to feature Tr.aceArray(...) and Tr.aceObject(...), two functions to neatly format Arrays and Objects within the output console.</p>
 	 * 
 	 * <p><b>UPDATE 1.2:</b>  The Tr.ace() library has been extended again to feature Tr.aceMulti(...), a function to trace an unlimited number of arguments all on one line.</p>
+	 * 
+	 * <p><b>UPDATE 1.3:</b>  Updated to support Flash Player 9 (removed clipboard functionality from fp9 branch).</p>
+	 * 
+	 * <p><b>UPDATE 1.4:</b>  The Tr.ace() library has been extended to include a 'console' in the form of a textfield that all your traces are output to.  For those working off the FP10 branch a new 'log' feature has also been integrated allowing you to output the traces to a .txt file.</p>
 	 * 
 	 * @author MSFX Matt Stuttard Parker
 	 */
@@ -158,9 +162,9 @@ package uk.msfx.utils.tracing.fp10
 		}
 		
 		/**
-		 * Save the current Tr.ace(...) log out to a text file
+		 * Save the current Tr.ace(...) log out to a text file.
 		 * 
-		 * <p>Log file will be time stamped by default </p>
+		 * <p>Log file will be time stamped by default in the format "DD-MM-YYYY-HHMM".</p>
 		 */
 		public static function saveLog():void 
 		{
@@ -184,7 +188,9 @@ package uk.msfx.utils.tracing.fp10
 		
 		
 		/**
-		 * Assign a Textfield as a "console" to output the traces to
+		 * Assign a Textfield as a "console" to output the traces to.
+		 * 
+		 * <p>You can then position this textfield wherever you wish and toggle it visible etc to mimic a "real console".</p>
 		 */
 		static public function get console():TextField{ return core.console; }
 		
