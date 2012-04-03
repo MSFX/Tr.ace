@@ -6,6 +6,8 @@ With Tr.ace() you can manage all your output statements, restricting or ignoring
 
 The output using Tr.ace() can also be formatted with timestamps, linebreaks, the name of the user tracing, the Class the trace resides within and can be automatically copied to the clipboard.
 
+The output can also be output to a textfield within your application to allow a "console" at runtime.  You can also output your Tr.ace(...) statements to a .txt file with the new save log functionality.
+
 For those using FlashDevelop you can prefix your username with "0:", "1:", "2:", "3:", or "4:" to trace in a different colour within the FlashDevelop output console, as shown with the 'FLASH_DEVELOP' username
 
 

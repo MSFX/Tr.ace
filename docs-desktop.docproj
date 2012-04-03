@@ -1,9 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <docProject xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <pageTitle>Tr.ace Documentation</pageTitle>
-  <classPaths>F:\My Dropbox\flash\classes\uk\msfx\utils\tracing</classPaths>
+  <classPaths>F:\Dropbox\flash\classes\uk\msfx\utils\tracing</classPaths>
   <sourcesList />
-  <outputDirectory>F:\My Dropbox\projects\Tr.ace\docs</outputDirectory>
+  <outputDirectory>F:\Dropbox\projects\Tr.ace\docs</outputDirectory>
   <activeCompiler>1</activeCompiler>
   <extraOptions />
 </docProject>
