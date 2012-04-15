@@ -1,7 +1,7 @@
 /**
  * Tr.ace() by MSFX Matt Stuttard Parker
- * Version 1.4
- * 02.04.2012
+ * Version 1.5
+ * 15.04.2012
  * 
  * Copyright (c) MSFX Matt Stuttard Parker
  * 
@@ -54,6 +54,8 @@ package uk.msfx.utils.tracing.fp10
 	 * 
 	 * <p><b>UPDATE 1.4:</b>  The Tr.ace() library has been extended to include a 'console' in the form of a textfield that all your traces are output to.  For those working off the FP10 branch a new 'log' feature has also been integrated allowing you to output the traces to a .txt file.</p>
 	 * 
+	 * <p><b>UPDATE 1.5:</b>  To make the library more accessible and less "verbose" for simple quick use the username and class are now <b>OPTIONAL</b> parameters.</p>
+	 * 
 	 * @author MSFX Matt Stuttard Parker
 	 */
 	public class Tr 
@@ -93,11 +95,10 @@ package uk.msfx.utils.tracing.fp10
 		 * <p><code>Tr.ace(4 + 21 + variableName, TrUsers.YOUR_USERNAME, AnotherClassName);</code></p>
 		 * 
 		 * @param	output 			The output that you wish to trace to the console
-		 * @param	user 			The name of the user tracing the output
-		 * @param	withinClass		The name of the Class the output is being traced from
+		 * @param	user 			<b>OPTIONAL: </b>The name of the user tracing the output
+		 * @param	withinClass		<b>OPTIONAL: </b>The name of the Class the output is being traced from
 		 */
-		//public static function ace(output:*, user:String = "default", withinClass:Class = null):void 
-		public static function ace(output:*, user:String, withinClass:*):void 
+		public static function ace(output:*, user:String = "", withinClass:Class = null):void 
 		{
 			// trace the output to the console if tracing is on
 			if (!core.enabled) core.out(output, user, withinClass);
@@ -114,10 +115,10 @@ package uk.msfx.utils.tracing.fp10
 		 * Tr.aceArray(dummyArray, TrUsers.YOUR_USERNAME, AnotherClassName);</code></p>
 		 * 
 		 * @param	output			The Array that you wish to trace to the console
-		 * @param	user			The name of the user tracing the output
-		 * @param	withinClass		The name of the Class the output is being traced from
+		 * @param	user			<b>OPTIONAL: </b>The name of the user tracing the output
+		 * @param	withinClass		<b>OPTIONAL: </b>The name of the Class the output is being traced from
 		 */
-		public static function aceArray(output:Array, user:String, withinClass:*):void 
+		public static function aceArray(output:Array, user:String = "", withinClass:Class = null):void 
 		{
 			// trace the output to the console if tracing is on
 			if (!core.enabled) core.outArray(output, user, withinClass);
@@ -131,13 +132,13 @@ package uk.msfx.utils.tracing.fp10
 		 * <p><code>Tr.aceObject({"a" : 1, "b" : 2, "c" : 3], TrUsers.MATT, ClassName);</code></p>
 		 * 
 		 * <p><code>var dummyObject:Object = {"array test" : [1, 2, 3], "numbers" : 123.456, "obj" : {"a" : 1, "b" : 2, "c" : 3} }; 
-		 * Tr.aceArray(dummyObject, TrUsers.DEFAULT, AnotherClassName);</code></p>
+		 * Tr.aceObject(dummyObject, TrUsers.DEFAULT, AnotherClassName);</code></p>
 		 * 
 		 * @param	output			The Object that you wish to trace to the console
-		 * @param	user			The name of the user tracing the output
-		 * @param	withinClass		The name of the Class the output is being traced from
+		 * @param	user			<b>OPTIONAL: </b>The name of the user tracing the output
+		 * @param	withinClass		<b>OPTIONAL: </b>The name of the Class the output is being traced from
 		 */
-		public static function aceObject(output:Object, user:String, withinClass:*):void 
+		public static function aceObject(output:Object, user:String = "", withinClass:Class = null):void 
 		{
 			if (!core.enabled) core.outObject(output, user, withinClass);
 		}
@@ -152,11 +153,11 @@ package uk.msfx.utils.tracing.fp10
 		 * 
 		 * <p><code>Tr.aceMulti(TrUsers.DEFAULT, ClassName, "string to trace", 1.2 + 4.5, ["array", "to", "trace"]);</code></p>
 		 * 
-		 * @param	user			The name of the user tracing the output
-		 * @param	withinClass		The name of the Class the output is being traced from
-		 * @param	...values		The values that you wish to trace to the console
+		 * @param	user			<b>OPTIONAL: </b>The name of the user tracing the output
+		 * @param	withinClass		<b>OPTIONAL: </b>The name of the Class the output is being traced from
+		 * @param	...values		<b>OPTIONAL: </b>The values that you wish to trace to the console
 		 */
-		public static function aceMulti(user:String, withinClass:*, ...values):void 
+		public static function aceMulti(user:String = "", withinClass:* = null, ...values):void 
 		{
 			if (!core.enabled) core.outMulti(values, user, withinClass);
 		}

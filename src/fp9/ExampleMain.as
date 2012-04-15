@@ -68,8 +68,6 @@ package
 			// remove event listener
 			removeEventListener(Event.ADDED_TO_STAGE, init);
 			
-			
-			
 			/**
 			 * Welcome to the Tr.ace() Example!
 			 * 
@@ -124,6 +122,7 @@ package
 			 * third class 'AnotherTestClass' which will make once last Tr.ace(...) call.
 			 */
 			
+			
 			// now lets add a trace statement from user 'MSFX' within this 'ExampleMain' Class
 			Tr.ace("Testing Tr.ace(...)!", TrUsers.MSFX, ExampleMain);
 			
@@ -143,16 +142,17 @@ package
 			
 			
 			
+			
 			/**
 			 * The following demonstrates the use of Tr.aceArray(...) used for the tracing of Arrays.
 			 * 
-			 * First, uncomment line ~170 to demonstrate tracing a simple Array using Tr.aceArray(...).
+			 * First, uncomment line ~167 to demonstrate tracing a simple Array using Tr.aceArray(...).
 			 * 
-			 * Secondly, uncomment line ~177 to demonstrate tracing a more complex Array using Tr.aceArray(...).
+			 * Secondly, uncomment line ~174 to demonstrate tracing a more complex Array using Tr.aceArray(...).
 			 * This more complex Array involves several nested Arrays and Objects.
 			 * 
 			 * You can also toggle whether line breaks appear between standard Tr.ace(...) calls and within the Tr.aceArray(...) 
-			 * and Tr.aceObject(...) calls by toggling 'Tr.arrayAndObjectLinebreaks' on line ~164
+			 * and Tr.aceObject(...) calls by toggling 'Tr.arrayAndObjectLinebreaks' on line ~161
 			 */
 			
 			
@@ -178,13 +178,13 @@ package
 			/**
 			 * The following demonstrates the use of Tr.aceObjects(...) used for the tracing of Objects
 			 * 
-			 * First, uncomment line ~201 to demonstrate tracing a simple Object using Tr.aceObject(...)
+			 * First, uncomment line ~198 to demonstrate tracing a simple Object using Tr.aceObject(...)
 			 * 
-			 * Secondly, uncomment line ~211 to demonstrate tracing a more complex Object using Tr.aceObject(...).
+			 * Secondly, uncomment line ~208 to demonstrate tracing a more complex Object using Tr.aceObject(...).
 			 * This more complex Object involves several nested Arrays and Objects.
 			 * 
 			 * Again, you can also toggle whether line breaks appear between standard Tr.ace(...) calls and within 
-			 * the Tr.aceArray(...) and Tr.aceObject(...) calls by toggling 'Tr.arrayAndObjectLinebreaks' on line ~164
+			 * the Tr.aceArray(...) and Tr.aceObject(...) calls by toggling 'Tr.arrayAndObjectLinebreaks' on line ~161
 			 */
 			
 			// create a simple object
@@ -210,9 +210,9 @@ package
 			
 			
 			/**
-			 * This last example demonstrates the use of Tr.aceMulti(...) used for tracing a list of multiple arguments
+			 * This example demonstrates the use of Tr.aceMulti(...) used for tracing a list of multiple arguments
 			 * 
-			 * Uncomment line ~228 to demonstrate a tracing of a String, the addition of two integers, an Array and an Object all 
+			 * Uncomment line ~225 to demonstrate a tracing of a String, the addition of two integers, an Array and an Object all 
 			 * from one statement on one line.
 			 */
 			
@@ -223,6 +223,26 @@ package
 			
 			// trace an unlimited number of arguments seperated via commas
 			//Tr.aceMulti(TrUsers.MSFX, Object(this).constructor, test, one + two, ["a", "b", "c", "d"], obj);
+			
+			
+			
+			
+			/**
+			 * This example demonstrates the use of Tr.ace(...) without the username or class parameters (now optional from Tr.ace() v1.5)
+			 * 
+			 * Uncomment line ~242 to demonstrate Tr.ace(...) tracing a string without the username or class parameter
+			 * Uncomment line ~243 to demonstrate Tr.aceArray(...) tracing an array without the username or class parameter
+			 * Uncomment line ~244 to demonstrate Tr.aceObject(...) tracing an object without the username or class parameter
+			 * Uncomment line ~245 to demonstrate Tr.aceMulti(...) tracing multiple values without the username or class parameter
+			 * 
+			 * NB: Using Tr.ace() without users/classes does remove alot of "the power" from the library with regards to restricting 
+			 * traces to specific users or classes but options such as the console will still function fully.
+			 */
+			
+			//Tr.ace("This is a comment without a User OR Class! =0!");
+			//Tr.aceArray([1, 2, 3, 4]);
+			//Tr.aceObject( { testing: "works !" } );
+			//Tr.aceMulti("", null, "testing", 1, 2, 3);
 			
 		}
 		

@@ -1,7 +1,7 @@
 /**
  * Tr.ace() by MSFX Matt Stuttard Parker
- * Version 1.4
- * 02.04.2012
+ * Version 1.5
+ * 15.04.2012
  * 
  * Copyright (c) MSFX Matt Stuttard Parker
  * 
@@ -32,6 +32,7 @@
 package uk.msfx.utils.tracing.core
 {
 	import flash.text.TextField;
+	
 	/**
 	 * A 'Singleton Class' to store the settings across the Tr.ace() library.
 	 * 

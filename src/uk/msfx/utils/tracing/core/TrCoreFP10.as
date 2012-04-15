@@ -1,7 +1,7 @@
 /**
  * Tr.ace() by MSFX Matt Stuttard Parker
- * Version 1.4
- * 02.04.2012
+ * Version 1.5
+ * 15.04.2012
  * 
  * Copyright (c) MSFX Matt Stuttard Parker
  * 
@@ -61,7 +61,7 @@ package uk.msfx.utils.tracing.core
 		 * @param	startWithLineBreak 		Whether to start the trace with a line break
 		 * @param	endWithLineBreak 		Whether to end the trace with a line break
 		 */
-		override public function out(output:*, user:String, withinClass:*, startWithLineBreak:Boolean = false, endWithLineBreak:Boolean = false):void 
+		override public function out(output:*, user:String = "", withinClass:* = null, startWithLineBreak:Boolean = false, endWithLineBreak:Boolean = false):void 
 		{
 			super.out(output, user, withinClass, startWithLineBreak, endWithLineBreak);
 			

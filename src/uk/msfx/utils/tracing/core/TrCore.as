@@ -1,7 +1,7 @@
 /**
  * Tr.ace() by MSFX Matt Stuttard Parker
- * Version 1.4
- * 02.04.2012
+ * Version 1.5
+ * 15.04.2012
  * 
  * Copyright (c) MSFX Matt Stuttard Parker
  * 
@@ -135,11 +135,11 @@ package uk.msfx.utils.tracing.core
 		 * Function to format and trace the contents of an Array to the console.
 		 * 
 		 * @param	output			The Array that you wish to trace to the console
-		 * @param	user			The name of the user tracing the output
-		 * @param	withinClass		The name of the Class being traced from
-		 * @param	level			how many levels the current Array is (support for nested arrays)
+		 * @param	user			<b>OPTIONAL: </b>The name of the user tracing the output
+		 * @param	withinClass		<b>OPTIONAL: </b>The name of the Class being traced from
+		 * @param	level			<b>OPTIONAL: </b>How many levels the current Array is (support for nested arrays)
 		 */
-		public function outArray(output:Array, user:String, withinClass:*, level:int = 0):void 
+		public function outArray(output:Array, user:String = "", withinClass:* = null, level:int = 0):void 
 		{
 			// length of array
 			var le:int = output.length;
@@ -189,10 +189,10 @@ package uk.msfx.utils.tracing.core
 		 * Function to trace multiple values out, seperated by commas.
 		 * 
 		 * @param	values 			Array of values to be traced out
-		 * @param	user			The user tracing the values
-		 * @param	withinClass		The class being traced from
+		 * @param	user			<b>OPTIONAL: </b>The user tracing the values
+		 * @param	withinClass		<b>OPTIONAL: </b>The class being traced from
 		 */
-		public function outMulti(values:Array, user:String, withinClass:*):void 
+		public function outMulti(values:Array, user:String = "", withinClass:* = null):void 
 		{
 			var le:int = values.length;
 			var traceStr:String = "";
@@ -221,11 +221,11 @@ package uk.msfx.utils.tracing.core
 		 * Function to format and trace the contents of an Object to the console.
 		 * 
 		 * @param	output			The Object that you wish to trace to the console
-		 * @param	user			The name of the user tracing the output
-		 * @param	withinClass		The name of the Class being traced from
-		 * @param	level			how many levels the current Object is (support for nested Objects)
+		 * @param	user			<b>OPTIONAL: </b>The name of the user tracing the output
+		 * @param	withinClass		<b>OPTIONAL: </b>The name of the Class being traced from
+		 * @param	level			<b>OPTIONAL: </b>How many levels the current Object is (support for nested Objects)
 		 */
-		public function outObject(output:Object, user:String, withinClass:*, level:int = 0):void
+		public function outObject(output:Object, user:String = "", withinClass:* = null, level:int = 0):void
 		{
 			// prefix variable
 			var prefix:String = "";
@@ -270,12 +270,12 @@ package uk.msfx.utils.tracing.core
 		 * Function to format and trace to the output console.
 		 * 
 		 * @param	output 					The output that you wish to trace to the console
-		 * @param	user 					The name of the user tracing the output
-		 * @param	withinClass				The name of the Class the output is being traced from
-		 * @param	startWithLineBreak 		Whether to start the trace with a line break
-		 * @param	endWithLineBreak 		Whether to end the trace with a line break
+		 * @param	user 					<b>OPTIONAL: </b>The name of the user tracing the output
+		 * @param	withinClass				<b>OPTIONAL: </b>The name of the Class the output is being traced from
+		 * @param	startWithLineBreak 		<b>OPTIONAL: </b>Whether to start the trace with a line break
+		 * @param	endWithLineBreak 		<b>OPTIONAL: </b>Whether to end the trace with a line break
 		 */
-		public function out(output:*, user:String, withinClass:*, startWithLineBreak:Boolean = false, endWithLineBreak:Boolean = false):void 
+		public function out(output:*, user:String = "", withinClass:* = null, startWithLineBreak:Boolean = false, endWithLineBreak:Boolean = false):void 
 		{
 			// if there are restrictions on which classes to trace from test for match, else kill the function
 			if (_restrictToClasses.length > 0 && _restrictToClasses.indexOf(withinClass) < 0) return;
@@ -296,10 +296,10 @@ package uk.msfx.utils.tracing.core
 			if (_useTimeStamp) traceStr = "(" + date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds() + ":" + date.getMilliseconds() + ") ";
 			
 			// add the users name
-			traceStr += user.toUpperCase() + " ";
+			if (user.length > 0) traceStr += user.toUpperCase() + " ";
 			
 			// add the class tracing from
-			traceStr += withinClass + " - ";
+			if (withinClass != null) traceStr += withinClass + " - ";
 			
 			// if there are restrictions on which users to trace from
 			if (_restrictToUsers.length > 0)
