@@ -31,9 +31,11 @@
  **/
 package uk.msfx.utils.tracing.fp10
 {
+	import flash.desktop.Clipboard;
+	import flash.desktop.ClipboardFormats;
 	import flash.net.FileReference;
 	import flash.text.TextField;
-	import uk.msfx.utils.tracing.core.TrCoreFP10;
+	import uk.msfx.utils.tracing.core.TrCore;
 	
 	/**
 	 * Tr.ace() is a library for managing trace statements within AS3 (Flash Player 10 Version).
@@ -56,17 +58,18 @@ package uk.msfx.utils.tracing.fp10
 	 * 
 	 * <p><b>UPDATE 1.5:</b>  To make the library more accessible and less "verbose" for simple quick use the username and class are now <b>OPTIONAL</b> parameters.</p>
 	 * 
+	 * <p><b>UPDATE 1.6:</b>  Rearchitectured Clipboard (FP10 Branch only) and Logging functionality to work together more sensibly.  To copy to clipboard you must now call Tr.copyLogToClipboard().  You can also clear the log using Tr.clearLog()
+	 * 
 	 * @author MSFX Matt Stuttard Parker
 	 */
 	public class Tr 
 	{
 		// the tracing engine TrCore is a singleton so only one instance will ever exist
-		private static var core:TrCoreFP10 = new TrCoreFP10();
+		private static var core:TrCore = new TrCore();
 		
 		// variables to tailor the output
 		private static var _arrayAndObjectLinebreaks:Boolean;
 		private static var _console:TextField;
-		private static var _copyToClipboard:Boolean;
 		private static var _enabled:Boolean;
 		private static var _restrictToClasses:Array;
 		private static var _ignoreClasses:Array;
@@ -183,6 +186,24 @@ package uk.msfx.utils.tracing.fp10
 		}
 		
 		/**
+		 * Clear the current log
+		 */
+		public static function clearLog():void 
+		{
+			core.clearLog();
+		}
+		
+		/**
+		 * Copy the current log to the Clipboard
+		 * 
+		 * <p>Requires Flash Player 10+</p>
+		 */
+		public static function copyLogToClipboard():void 
+		{
+			Clipboard.generalClipboard.setData(ClipboardFormats.TEXT_FORMAT, core.log);
+		}
+		
+		/**
 		 * Toggle whether a line break will be added at the beginning and end of a Tr.aceArray() or Tr.aceObject() call.
 		 */
 		static public function get arrayAndObjectLinebreaks():Boolean { return core.arrayAndObjectLinebreaks; }
@@ -194,12 +215,6 @@ package uk.msfx.utils.tracing.fp10
 		 * <p>You can then position this textfield wherever you wish and toggle it visible etc to mimic a "real console".</p>
 		 */
 		static public function get console():TextField{ return core.console; }
-		
-		
-		/**
-		 * Toggle whether the output is automatically updated to the clipboard.
-		 */
-		static public function get copyToClipboard():Boolean { return core.copyToClipboard; }
 		
 		
 		/**
@@ -273,7 +288,7 @@ package uk.msfx.utils.tracing.fp10
 		static public function get restrictToUsers():Array { return core.restrictToUsers; }
 		
 		/**
-		 * Toggle whether the output (and clipboard if toggled on) has line breaks between each trace.
+		 * Toggle whether the output has line breaks between each trace.
 		 */
 		static public function get useLineBreaks():Boolean { return core.useLineBreaks; }
 		
@@ -288,9 +303,6 @@ package uk.msfx.utils.tracing.fp10
 		
 		/** @private */
 		static public function set console(value:TextField):void { core.console = value; }
-		
-		/** @private */
-		static public function set copyToClipboard(value:Boolean):void { core.copyToClipboard = value; }
 		
 		/** @private */
 		static public function set enabled(value:Boolean):void { core.enabled = value; }

@@ -55,6 +55,8 @@ package uk.msfx.utils.tracing.fp9
 	 * 
 	 * <p><b>UPDATE 1.5:</b>  To make the library more accessible and less "verbose" for simple quick use the username and class are now <b>OPTIONAL</b> parameters.</p>
 	 * 
+	 * <p><b>UPDATE 1.6:</b>  Rearchitectured Clipboard (FP10 Branch only) and Logging functionality to work together more sensibly.  To copy to clipboard you must now call Tr.copyLogToClipboard().  You can also clear the log using Tr.clearLog()
+	 * 
 	 * @author MSFX Matt Stuttard Parker
 	 */
 	public class Tr 
@@ -64,7 +66,6 @@ package uk.msfx.utils.tracing.fp9
 		
 		// variables to tailor the output
 		private static var _arrayAndObjectLinebreaks:Boolean;
-		//private static var _copyToClipboard:Boolean;
 		private static var _enabled:Boolean;
 		private static var _restrictToClasses:Array;
 		private static var _ignoreClasses:Array;
@@ -158,15 +159,17 @@ package uk.msfx.utils.tracing.fp9
 		}
 		
 		/**
+		 * Clear the current log
+		 */
+		public static function clearLog():void 
+		{
+			core.clearLog();
+		}
+		
+		/**
 		 * Toggle whether a line break will be added at the beginning and end of a Tr.aceArray() or Tr.aceObject() call.
 		 */
 		static public function get arrayAndObjectLinebreaks():Boolean { return core.arrayAndObjectLinebreaks; }
-		
-		
-		/**
-		 * Toggle whether the output is automatically updated to the clipboard.
-		 */
-		//static public function get copyToClipboard():Boolean { return core.copyToClipboard; }
 		
 		
 		/**
@@ -259,9 +262,6 @@ package uk.msfx.utils.tracing.fp9
 		
 		/** @private */
 		static public function set arrayAndObjectLinebreaks(value:Boolean):void { core.arrayAndObjectLinebreaks = value; }
-		
-		/** @private */
-		//static public function set copyToClipboard(value:Boolean):void { core.copyToClipboard = value; }
 		
 		/** @private */
 		static public function set console(value:TextField):void { core.console = value; }

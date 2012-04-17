@@ -76,7 +76,7 @@ package
 			 * There are several optional toggles you can use with the Tr.ace library, these are commented out below.
 			 * 
 			 * You can combine options for example to only allow traces from 'MSFX', within the Class 'AnotherTestClass', 
-			 * formatted with linebreaks, timestamps and with the traces automatically copied to the clipboard :)
+			 * formatted with linebreaks, timestamps :)
 			 */
 			
 			// uncomment to restrict the trace output(s) to only the 'ExampleClass2' Class
@@ -108,9 +108,6 @@ package
 			// uncomment to show the time with each trace
 			//Tr.useTimeStamp = true;
 			
-			// uncomment to copy the trace output to the clipboard (non IDE debugging - FP10 only)
-			//Tr.copyToClipboard = true;
-			
 			// uncomment to add linebreaks between each output
 			//Tr.useLineBreaks = true;
 			
@@ -123,7 +120,7 @@ package
 			// uncomment to output all the traces to the textfield
 			//Tr.console = textfield;
 			
-			// to preview the new 'log' feature, uncomment the line at the bottom of this function (line ~253)
+			// NB: To preview the new 'log' features, uncomment the line(s) at the bottom of this function (line 271)
 			
 			
 			// uncomment to switch tracing off entirely
@@ -161,13 +158,13 @@ package
 			/**
 			 * The following demonstrates the use of Tr.aceArray(...) used for the tracing of Arrays.
 			 * 
-			 * First, uncomment line ~182 to demonstrate tracing a simple Array using Tr.aceArray(...).
+			 * First, uncomment line 182 to demonstrate tracing a simple Array using Tr.aceArray(...).
 			 * 
-			 * Secondly, uncomment line ~189 to demonstrate tracing a more complex Array using Tr.aceArray(...).
+			 * Secondly, uncomment line 189 to demonstrate tracing a more complex Array using Tr.aceArray(...).
 			 * This more complex Array involves several nested Arrays and Objects.
 			 * 
 			 * You can also toggle whether line breaks appear between standard Tr.ace(...) calls and within the Tr.aceArray(...) 
-			 * and Tr.aceObject(...) calls by toggling 'Tr.arrayAndObjectLinebreaks' on line ~176
+			 * and Tr.aceObject(...) calls by toggling 'Tr.arrayAndObjectLinebreaks' on line 176
 			 */
 			
 			
@@ -193,13 +190,13 @@ package
 			/**
 			 * The following demonstrates the use of Tr.aceObjects(...) used for the tracing of Objects
 			 * 
-			 * First, uncomment line ~213 to demonstrate tracing a simple Object using Tr.aceObject(...)
+			 * First, uncomment line 213 to demonstrate tracing a simple Object using Tr.aceObject(...)
 			 * 
-			 * Secondly, uncomment line ~223 to demonstrate tracing a more complex Object using Tr.aceObject(...).
+			 * Secondly, uncomment line 223 to demonstrate tracing a more complex Object using Tr.aceObject(...).
 			 * This more complex Object involves several nested Arrays and Objects.
 			 * 
 			 * Again, you can also toggle whether line breaks appear between standard Tr.ace(...) calls and within 
-			 * the Tr.aceArray(...) and Tr.aceObject(...) calls by toggling 'Tr.arrayAndObjectLinebreaks' on line ~176
+			 * the Tr.aceArray(...) and Tr.aceObject(...) calls by toggling 'Tr.arrayAndObjectLinebreaks' on line 176
 			 */
 			
 			// create a simple object
@@ -227,7 +224,7 @@ package
 			/**
 			 * This example demonstrates the use of Tr.aceMulti(...) used for tracing a list of multiple arguments
 			 * 
-			 * Uncomment line ~240 to demonstrate a tracing of a String, the addition of two integers, an Array and an Object all 
+			 * Uncomment line 240 to demonstrate a tracing of a String, the addition of two integers, an Array and an Object all 
 			 * from one statement on one line.
 			 */
 			
@@ -242,24 +239,12 @@ package
 			
 			
 			/**
-			 * This example demonstrates how to output the log as a textfile
-			 * 
-			 * Uncomment line ~253 to save the log file out automatically once all the traces have been made
-			 * 
-			 * NB:  The name of the textfield is automatically created as a timestamp
-			 */
-			
-			// uncomment to save log as textfile
-			//Tr.saveLog();
-			
-			
-			/**
 			 * This example demonstrates the use of Tr.ace(...) without the username or class parameters (now optional from Tr.ace() v1.5)
 			 * 
-			 * Uncomment line ~268 to demonstrate Tr.ace(...) tracing a string without the username or class parameter
-			 * Uncomment line ~269 to demonstrate Tr.aceArray(...) tracing an array without the username or class parameter
-			 * Uncomment line ~270 to demonstrate Tr.aceObject(...) tracing an object without the username or class parameter
-			 * Uncomment line ~271 to demonstrate Tr.aceMulti(...) tracing multiple values without the username or class parameter
+			 * Uncomment line 253 to demonstrate Tr.ace(...) tracing a string without the username or class parameter
+			 * Uncomment line 254 to demonstrate Tr.aceArray(...) tracing an array without the username or class parameter
+			 * Uncomment line 255 to demonstrate Tr.aceObject(...) tracing an object without the username or class parameter
+			 * Uncomment line 256 to demonstrate Tr.aceMulti(...) tracing multiple values without the username or class parameter
 			 * 
 			 * NB: Using Tr.ace() without users/classes does remove alot of "the power" from the library with regards to restricting 
 			 * traces to specific users or classes but options such as the console will still function fully.
@@ -269,6 +254,27 @@ package
 			//Tr.aceArray([1, 2, 3, 4]);
 			//Tr.aceObject( { testing: "works !" } );
 			//Tr.aceMulti("", null, "testing", 1, 2, 3);
+			
+			
+			
+			/**
+			 * This example demonstrates how to output the log as a textfile, how to copy the log to the Clipboard and how to clear the log.
+			 * 
+			 * Uncomment line 271 to save the log file out automatically once all the traces have been made
+			 * Uncomment line 274 to copy to the clipboard
+			 * Uncomment line 277 to clear the log
+			 * 
+			 * NB:  The name of the textfield is automatically created as a timestamp
+			 */
+			
+			// uncomment to save log as textfile
+			//Tr.saveLog();
+			
+			// uncomment to copy the log the clipboard
+			//Tr.copyLogToClipboard();
+			
+			// uncomment to clear the log
+			//Tr.clearLog();
 			
 		}
 		

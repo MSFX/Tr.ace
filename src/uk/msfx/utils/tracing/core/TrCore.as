@@ -32,6 +32,7 @@
 package uk.msfx.utils.tracing.core
 {
 	import flash.text.TextField;
+	import flash.ui.Keyboard;
 	import flash.utils.getQualifiedClassName;
 	
 	/**
@@ -51,13 +52,7 @@ package uk.msfx.utils.tracing.core
 		private var _arrayAndObjectLinebreaks:Boolean = false;
 		
 		/** @private */
-		protected var clipboardText:String = "";
-		
-		/** @private */
 		protected var _console:TextField;
-		
-		/** @private */
-		protected var _copyToClipboard:Boolean = false;
 		
 		/** @private */
 		private var _enabled:Boolean = false;
@@ -311,11 +306,7 @@ package uk.msfx.utils.tracing.core
 					trace(traceStr + output);
 					
 					// update log
-					//_log += ((traceStr + output) + "\n");
-					_log += ((traceStr + output) + String.fromCharCode(13));
-					
-					// update the clipboard if enabled
-					if (_copyToClipboard) clipboardText = _log;
+					_log += ((traceStr + output) + String.fromCharCode(Keyboard.ENTER));
 					
 					// push out to the console if enabled
 					if (_console) _console.appendText(traceStr + output + "\n");
@@ -328,10 +319,7 @@ package uk.msfx.utils.tracing.core
 				
 				// update log
 				//_log += ((traceStr + output) + "\n");
-				_log += ((traceStr + output) + String.fromCharCode(13));
-				
-				// update the clipboard if enabled
-				if (_copyToClipboard) clipboardText = _log;
+				_log += ((traceStr + output) + String.fromCharCode(Keyboard.ENTER));
 				
 				// push out to the console if enabled
 				if (_console) _console.appendText(traceStr + output + "\n");
@@ -345,9 +333,6 @@ package uk.msfx.utils.tracing.core
 				// update log
 				_log += "\n";
 				
-				// update the clipboard if enabled
-				if (_copyToClipboard) clipboardText += "\n";
-				
 				// update the console if enabled
 				if (_console) _console.appendText("\n");
 			}
@@ -360,14 +345,18 @@ package uk.msfx.utils.tracing.core
 				// update log
 				_log += "\n";
 				
-				// update the clipboard if enabled
-				if (_copyToClipboard) clipboardText += "\n";
-				
 				// update the console if enabled
 				if (_console) _console.appendText("\n");
 			}
 		}
 		
+		/**
+		 * Clear the log
+		 */
+		public function clearLog():void 
+		{
+			_log = "";
+		}
 		
 		/** @private */
 		public function get arrayAndObjectLinebreaks():Boolean { return settings.arrayAndObjectLinebreaks; }

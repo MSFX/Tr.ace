@@ -33,6 +33,7 @@ package
 {
 	import flash.display.Sprite;
 	import flash.events.Event;
+	import flash.text.TextField;
 	import uk.msfx.utils.tracing.fp9.Tr;
 	import uk.msfx.utils.tracing.users.TrUsers;
 	
@@ -74,7 +75,7 @@ package
 			 * There are several optional toggles you can use with the Tr.ace library, these are commented out below.
 			 * 
 			 * You can combine options for example to only allow traces from 'MSFX', within the Class 'AnotherTestClass', 
-			 * formatted with linebreaks, timestamps and with the traces automatically copied to the clipboard :)
+			 * formatted with linebreaks and timestamps :)
 			 */
 			
 			// uncomment to restrict the trace output(s) to only the 'ExampleClass2_FP9' Class
@@ -109,8 +110,17 @@ package
 			// uncomment to add linebreaks between each output
 			//Tr.useLineBreaks = true;
 			
+			// create a textfield to use as the "console"
+			var textfield:TextField = new TextField();
+			textfield.width = stage.stageWidth;
+			textfield.height = stage.stageHeight;
+			addChild(textfield);
+			
+			// uncomment to output all the traces to the textfield NB: If you want to clear the log (the output within the textfield) then look at line 268
+			//Tr.console = textfield;
+			
 			// uncomment to switch tracing off entirely
-			//Tr.off = true;
+			//Tr.enabled = true;
 			
 			
 			
@@ -146,13 +156,13 @@ package
 			/**
 			 * The following demonstrates the use of Tr.aceArray(...) used for the tracing of Arrays.
 			 * 
-			 * First, uncomment line ~167 to demonstrate tracing a simple Array using Tr.aceArray(...).
+			 * First, uncomment line 174 to demonstrate tracing a simple Array using Tr.aceArray(...).
 			 * 
-			 * Secondly, uncomment line ~174 to demonstrate tracing a more complex Array using Tr.aceArray(...).
+			 * Secondly, uncomment line 180 to demonstrate tracing a more complex Array using Tr.aceArray(...).
 			 * This more complex Array involves several nested Arrays and Objects.
 			 * 
 			 * You can also toggle whether line breaks appear between standard Tr.ace(...) calls and within the Tr.aceArray(...) 
-			 * and Tr.aceObject(...) calls by toggling 'Tr.arrayAndObjectLinebreaks' on line ~161
+			 * and Tr.aceObject(...) calls by toggling 'Tr.arrayAndObjectLinebreaks' on line 171
 			 */
 			
 			
@@ -178,13 +188,13 @@ package
 			/**
 			 * The following demonstrates the use of Tr.aceObjects(...) used for the tracing of Objects
 			 * 
-			 * First, uncomment line ~198 to demonstrate tracing a simple Object using Tr.aceObject(...)
+			 * First, uncomment line 208 to demonstrate tracing a simple Object using Tr.aceObject(...)
 			 * 
-			 * Secondly, uncomment line ~208 to demonstrate tracing a more complex Object using Tr.aceObject(...).
+			 * Secondly, uncomment line 218 to demonstrate tracing a more complex Object using Tr.aceObject(...).
 			 * This more complex Object involves several nested Arrays and Objects.
 			 * 
 			 * Again, you can also toggle whether line breaks appear between standard Tr.ace(...) calls and within 
-			 * the Tr.aceArray(...) and Tr.aceObject(...) calls by toggling 'Tr.arrayAndObjectLinebreaks' on line ~161
+			 * the Tr.aceArray(...) and Tr.aceObject(...) calls by toggling 'Tr.arrayAndObjectLinebreaks' on line 161
 			 */
 			
 			// create a simple object
@@ -212,7 +222,7 @@ package
 			/**
 			 * This example demonstrates the use of Tr.aceMulti(...) used for tracing a list of multiple arguments
 			 * 
-			 * Uncomment line ~225 to demonstrate a tracing of a String, the addition of two integers, an Array and an Object all 
+			 * Uncomment line 235 to demonstrate a tracing of a String, the addition of two integers, an Array and an Object all 
 			 * from one statement on one line.
 			 */
 			
@@ -230,10 +240,10 @@ package
 			/**
 			 * This example demonstrates the use of Tr.ace(...) without the username or class parameters (now optional from Tr.ace() v1.5)
 			 * 
-			 * Uncomment line ~242 to demonstrate Tr.ace(...) tracing a string without the username or class parameter
-			 * Uncomment line ~243 to demonstrate Tr.aceArray(...) tracing an array without the username or class parameter
-			 * Uncomment line ~244 to demonstrate Tr.aceObject(...) tracing an object without the username or class parameter
-			 * Uncomment line ~245 to demonstrate Tr.aceMulti(...) tracing multiple values without the username or class parameter
+			 * Uncomment line 252 to demonstrate Tr.ace(...) tracing a string without the username or class parameter
+			 * Uncomment line 253 to demonstrate Tr.aceArray(...) tracing an array without the username or class parameter
+			 * Uncomment line 254 to demonstrate Tr.aceObject(...) tracing an object without the username or class parameter
+			 * Uncomment line 255 to demonstrate Tr.aceMulti(...) tracing multiple values without the username or class parameter
 			 * 
 			 * NB: Using Tr.ace() without users/classes does remove alot of "the power" from the library with regards to restricting 
 			 * traces to specific users or classes but options such as the console will still function fully.
@@ -243,6 +253,19 @@ package
 			//Tr.aceArray([1, 2, 3, 4]);
 			//Tr.aceObject( { testing: "works !" } );
 			//Tr.aceMulti("", null, "testing", 1, 2, 3);
+			
+			
+			
+			/**
+			 * This example demonstrates how to clear the log, useful if you're outputting "the console"
+			 * 
+			 * Uncomment line 268 to clear the log
+			 * 
+			 * NB:  The name of the textfield is automatically created as a timestamp
+			 */
+			
+			// uncomment to clear the log
+			Tr.clearLog();
 			
 		}
 		

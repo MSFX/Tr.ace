@@ -59,11 +59,6 @@ package uk.msfx.utils.tracing.core
 		public var console:TextField
 		
 		/**
-		 * Toggle whether the output is automatically updated to the clipboard.
-		 */
-		public var copyToClipboard:Boolean;
-		
-		/**
 		 * Toggle whether the output is on or off.
 		 */
 		public var enabled:Boolean;
@@ -89,7 +84,7 @@ package uk.msfx.utils.tracing.core
 		public var restrictToUsers:Array = [];
 		
 		/**
-		 * Toggle whether the output (and clipboard if toggled on) has line breaks inbetween each trace.
+		 * Toggle whether the output has line breaks inbetween each trace.
 		 */
 		public var useLineBreaks:Boolean;
 		
