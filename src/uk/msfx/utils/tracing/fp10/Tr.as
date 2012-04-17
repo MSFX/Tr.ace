@@ -1,7 +1,7 @@
 /**
  * Tr.ace() by MSFX Matt Stuttard Parker
- * Version 1.5
- * 15.04.2012
+ * Version 1.6
+ * 17.04.2012
  * 
  * Copyright (c) MSFX Matt Stuttard Parker
  * 
@@ -58,7 +58,7 @@ package uk.msfx.utils.tracing.fp10
 	 * 
 	 * <p><b>UPDATE 1.5:</b>  To make the library more accessible and less "verbose" for simple quick use the username and class are now <b>OPTIONAL</b> parameters.</p>
 	 * 
-	 * <p><b>UPDATE 1.6:</b>  Rearchitectured Clipboard (FP10 Branch only) and Logging functionality to work together more sensibly.  To copy to clipboard you must now call Tr.copyLogToClipboard().  You can also clear the log using Tr.clearLog()
+	 * <p><b>UPDATE 1.6:</b>  Rearchitectured Clipboard (FP10 Branch only) and Logging functionality to work together more sensibly.  To copy to clipboard you must now call Tr.copyLogToClipboard().  You can also clear the log using Tr.clearLog()</p>
 	 * 
 	 * @author MSFX Matt Stuttard Parker
 	 */
