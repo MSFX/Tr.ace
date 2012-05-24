@@ -1,12 +1,12 @@
 /**
  * Tr.ace() by MSFX Matt Stuttard Parker
- * Version 1.6
- * 17.04.2012
+ * Version 2.0
+ * 24.05.2012
  * 
  * Copyright (c) MSFX Matt Stuttard Parker
  * 
  * http://msfx.co.uk
- * http://labs.msfx.co.uk
+ * 
  * 
  * Permission is hereby granted, free of charge, to any person
  * obtaining a copy of this software and associated documentation
@@ -356,6 +356,9 @@ package uk.msfx.utils.tracing.core
 		public function clearLog():void 
 		{
 			_log = "";
+			
+			// clear the console if enabled
+			if (_console) _console.text = "";
 		}
 		
 		/** @private */

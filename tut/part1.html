@@ -1,0 +1,265 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Tr.ace()!</title>
+
+	<link rel="stylesheet" href="style/style.css" type="text/css" media="screen" />	
+	<link rel="stylesheet" href="style/syntaxHighlighter.css" type="text/css" media="screen" />	
+	<link rel="shortcut icon" href="http://marketplace.tutsplus.com/favicons/tutsmarketplace.ico"/>
+</head>
+
+<body>
+<div id="container">
+<div id="top">
+    <a href="http://marketplace.tutsplus.com"><img src="http://themeforest.net/images/tutsmarketplace/logo-dark.png" id="logo" /></a>
+    
+    <img src="images/preview.jpg" id="preview"/>
+  	<h2>Tr.ace()</h2>
+	<h4>By: MSFX</h4>
+  	<p>Tr.ace() is an open source library for formatting and managing trace statements within AS3.</p>
+	
+</div>
+
+<div id="content">
+	
+	<h3>An Introduction to Tr.ace()</h3>
+	
+	<p>All developers use some form of tracing as a loose method of debugging at some point whilst developing their applications.  The problem with the trace statement within AS3 though is that it's rather limited.  If you're working within a team it's possible you've no idea who's trace is who's, where any of the traces are coming from and there's no automated formatting to help distingish traces between users and classes!</p>
+	
+	<p>Wouldn't it be awesome if you could restrict your applications trace statements to specific classes or particular users, or even completely ignore traces from specific users or classes altogether?</p>
+	
+	<p>Wouldn't it be great to have a little more control over the formatting of your traces so that you know who traced it, the class it's traced from and the time the trace was executed?</p>
+	
+	<p>How about the ability to add automatic linebreaks between each trace, neatly trace out complex, nested Arrays and Objects all whilst automatically copying it to the clipboard?</p>
+	
+	<p><b>Welcome to Tr.ace()!</b></p>
+	
+	
+	<hr /><h3>Downloading Tr.ace()</h3>
+
+	<p>Tr.ace() is an open source library that's available to download <a href="files/Trace.zip">here at ActiveTuts in ZIP format</a> and also available as a public repository <a href="https://github.com/MSFX">on my GitHub</a> for those a little more Nerdy or who wish to Fork and/or contribute towards the Tr.ace() library.</p>
+	
+    <p>The library is AS3 only and has two seperate repositories developed for both Flash Player 9 and Flash Player 10.</p>
+    
+	<p>To use the Tr.ace() library you must download one of the above source packages and copy and paste the 'uk' directory, located within the 'src' directory, into your global classpath directory.  You're then all set to go!</p>
+	
+	
+	<hr />
+	
+	<h3>Configuring Tr.ace()</h3>
+	
+	
+	<p>Firstly, a little theory and explanation.  </p>
+    
+    <p>Tr.ace() is a library focused on tracing where 'Tr' is the Class and 'ace()' is a function of the Tr Class, hence the library name Tr.ace().</p>
+    
+    <p>The name of the library also illustrates the libraries usage.  As 'Tr' is a Static Class you don't need to create an instance of it to use its functions or configure any of its settings, you simply use Tr.whateverTheValue or Tr.whateverTheFunction().</p>
+	
+	<p>Lastly, because the internal workings of the library replicate the <a href="http://en.wikipedia.org/wiki/Singleton_pattern">Singleton Design Pattern</a>, any of the settings you apply to Tr.ace() only need applying once within your application - I'd suggest within your Document / Main Class.</p>
+	
+	<p>There are two versions of the library, one for Flash Player 9 and one for Flash Player 10.  The only difference is the Flash Player 10 version supports automatic copying to the Clipboard.</p>
+	
+	<p>Lets now take a look at some of these settings (the following are excerpts from ExampleMain.as within the src directory) :</p>
+	
+	<pre name="code" class="javascript">
+		// restrict the trace output(s) to only the 'ExampleClass2' Class
+		Tr.restrictToClasses = [ExampleClass2];
+		
+		
+		// ignore the trace output(s) from the 'ExampleMain' Class only
+		Tr.ignoreClasses = [ExampleMain];
+		
+		
+		// restrict the trace output(s) from user 'MSFX' only
+		Tr.restrictToUsers = [TrUsers.MSFX];
+		
+		
+		// ignore the trace output(s) from user 'MSFX' only
+		Tr.ignoreUsers = [TrUsers.MSFX];
+		 
+	</pre>
+	
+	<p>As you should be able to see from the above examples it's quite simple to very quickly tailor your output to either restrict the output to be from specific users or classes or ignore the output from specific users or classes.</p>
+	
+	<p>As the below examples also demonstrate its very easy to toggle linebreaks, timestamps and copying to the clipboard (FP10 only).  You can also very easily switch tracing off all together.</p>
+	
+	<pre name="code" class="javascript">
+		// show the time with each trace
+		Tr.useTimeStamp = true;
+		
+		
+		// copy the trace output to the clipboard (non IDE debugging - FP10 only)
+		Tr.copyToClipboard = true;
+		
+		
+		// add linebreaks between each output
+		Tr.useLineBreaks = true;
+		
+		
+		// switch tracing off entirely
+		Tr.off = true;
+		 
+	</pre>
+	
+	<p>Lets now have a quick look over the functions available within the Tr.ace() library.</p>
+	
+	
+	<hr />
+	
+	<h3>Tr.ace(...)</h3>
+	
+	
+	<p>The Tr.ace(...) function requires 3 parameters: the output, the username and the Class being traced from.</p>
+    
+    <p>All 3 of these parameters are required to allow the library to restrict or ignore traces from particular users or classes, if you're worried about this taking longer to type than a usual trace you can wrap it up as a Code Snippet in your favourite IDE - more later.</p>
+	
+	<pre name="code" class="javascript">
+		// A String as the output from user MSFX within the Class 'ClassName'.
+		Tr.ace("here is the output", TrUsers.MSFX, ClassName);
+		 
+		// Sum of several numbers as the output from user DEFAULT within the Class 'AnotherClassName'.
+		Tr.ace( ((1 + 2.5 + 6.999) * 12), TrUsers.DEFAULT, AnotherClassName);
+		 
+		// tracing a variable as the output from user MSFX within the Class 'YetAnotherClassName'.
+		Tr.ace("variable equals: " + variableName, TrUsers.MSFX, YetAnotherClassName);
+		 
+	</pre>
+	
+	
+	<hr />
+	
+	<h3>Tr.aceArray(...)</h3>
+	
+	
+	<p>The Tr.aceArray(...) function requires 3 parameters: the Array, the username and the Class being traced from.</p>
+    
+    <p>All 3 of these parameters are required to allow the library to restrict or ignore traces from particular users or classes, if you're worried about this taking longer to type than a usual trace you can wrap it up as a Code Snippet in your favourite IDE - more later.</p>
+	
+	<pre name="code" class="javascript">
+		// A String as the output from user MSFX within the Class 'ClassName'.
+		Tr.aceArray("here is the output", TrUsers.MSFX, ClassName);
+		 
+		// Sum of several numbers as the output from user DEFAULT within the Class 'AnotherClassName'.
+		Tr.aceArray( ((1 + 2.5 + 6.999) * 12), TrUsers.DEFAULT, AnotherClassName);
+		 
+	</pre>
+	
+	
+	<hr />
+	
+	<h3>Tr.aceMulti(...)</h3>
+	
+	
+	<p>The Tr.aceMulti(...) function requires a mimimum of 3 parameters: the username, the Class being traced from and an unlimited list of arguments (seperated via commas) to trace out.</p>
+    
+    <p>All 3 of these parameters are required to allow the library to restrict or ignore traces from particular users or classes, if you're worried about this taking longer to type than a usual trace you can wrap it up as a Code Snippet in your favourite IDE - more later.</p>
+	
+	<pre name="code" class="javascript">
+		// A String as the output from user MSFX within the Class 'ClassName'.
+		Tr.aceMulti("here is the output", TrUsers.MSFX, ClassName);
+		 
+		// Sum of several numbers as the output from user DEFAULT within the Class 'AnotherClassName'.
+		Tr.aceMulti( ((1 + 2.5 + 6.999) * 12), TrUsers.DEFAULT, AnotherClassName);
+		 
+	</pre>
+	
+	
+	<hr />
+	
+	<h3>Tr.aceObject(...)</h3>
+	
+	
+	<p>The Tr.aceObject(...) function requires 3 parameters: the Object, the username and the Class being traced from.</p>
+    
+    <p>All 3 of these parameters are required to allow the library to restrict or ignore traces from particular users or classes, if you're worried about this taking longer to type than a usual trace you can wrap it up as a Code Snippet in your favourite IDE - more later.</p>
+	
+	<pre name="code" class="javascript">
+		// A String as the output from user MSFX within the Class 'ClassName'.
+		Tr.aceObject("here is the output", TrUsers.MSFX, ClassName);
+		 
+		// Sum of several numbers as the output from user DEFAULT within the Class 'AnotherClassName'.
+		Tr.aceObject( ((1 + 2.5 + 6.999) * 12), TrUsers.DEFAULT, AnotherClassName);
+		 
+	</pre>
+	
+	
+	<hr />
+	
+	<h3>Adding Users to the Tr.ace() Library</h3>
+	
+	
+	<p>You may have noticed several pre-existing usernames within the Tr.ace() library such as TrUsers.DEFAULT and TrUsers.MSFX in the above examples.  To remove the event of typos it's recommended that you add your name as a Static Constant to the Tr.ace() Library as with the pre-existing usernames.</p>
+	
+	<p>To add yourself to the library open the 'TrUsers.as' file located at 'uk/msfx/utils/tracing/users/TrUsers.as'.  Add your own user name as a public static constant to the bottom of the list and your ready to go!</p>
+	
+	<pre name="code" class="javascript">
+		/**
+		 * Your username!
+		 */
+		public static const MATT:String = "Matt";
+		
+        
+	</pre>
+	
+	
+	<hr />
+	
+	<h3>Using Tr.ace() with Code Snippets</h3>
+	
+	
+	<p>Although Tr.ace() provides lots of advantages over using the usual trace() statement within Flash there is quite alot more to type which could potentially slow down your development.  Enter Code Snippets.</p>
+	
+	<p>Code Snippets are exactly what you'd think, snippets of code.  Most IDEs, if not all, support them and they speed up your development like you're superman.  I use FlashDevelop (and you should too!) so lets quickly have a look at adding a new code snippet for Tr.ace().</p>
+	
+	<p>The code snippet must be usable wherever you decide to add it to your application with as little adjustments as possible.  With Tr.ace() you must provide both the user tracing and the Class traced from along with the output.  The user is easy enough to wrap up in the code snippet since it'll likely not change very often however it's likely we'll trace from different Classes quite often.</p>
+	
+	<p>We therefore instead of entering the Class manually each time we can use a snippet of code to return the Class we're tracing from automatically.  I performed some tests using <a href="http://gskinner.com/blog/archives/2010/02/performancetest.html" target="_blank">Grant Skinners Performance Harness</a> on different approaches of achieving this and found the method below to be the most efficient (after using the actual Class name itself).  You can find the results within the src directory.</p>
+	
+	<p>Within FlashDevelop, or your favourite IDE, open the Code Snippets Panel and click 'Add' to create a new snippet.</p>
+	
+	<div class="tutorial_image"><img src="images/code-snippets-1.jpg" alt="code snippets menu" /></div>
+	
+	<p>Add a new snippet and call it whatever you want (I used 'tr') and add the main body to the snippet, with your own username of course.</p>
+	
+	<div class="tutorial_image"><img src="images/code-snippets-2.jpg" alt="adding snippet" /></div>
+	
+	<p>Add the entry point where the output for the trace should go.</p>
+	
+	<div class="tutorial_image"><img src="images/code-snippets-3.jpg" alt="adding entry point to snippet" /></div>
+	
+	<p>And finally click 'Save'.</p>
+	
+	<div class="tutorial_image"><img src="images/code-snippets-4.jpg" alt="adding entry point to snippet" /></div>
+	
+	<p>Code snippet complete!  To use the snippet within FlashDevelop simply press Ctrl+B, type 'tr' and hit Enter.</p>
+	
+	
+	<hr />
+	
+	<h3>Documentation for Tr.ace()</h3>
+	
+	<p>Within the download package you'll find a 'docs' directory, open the 'index.html' file to view the ASDocs generated Documentation for Tr.ace().  You can also find the documentation online: <a href="http://docs.msfx.co.uk/as3/trace/">http://docs.msfx.co.uk/as3/trace/</a>.</p>
+	
+	
+	<hr />
+	
+	<h3>Happy Tracing!</h3>
+	
+    <p>So, that's it really.  If you have any questions or suggestions for the library feel free to get in touch in the comments.</p>
+    
+    <p>Happy Tracing!</p>
+	
+</div>
+</div>
+
+<!--Syntax Highlighter-->
+<script class="javascript" src="http://active.tutsplus.com/wp-content/plugins/google-syntax-highlighter/Scripts/shCore.js"></script>
+<script class="javascript" src="http://active.tutsplus.com/wp-content/plugins/google-syntax-highlighter/Scripts/shBrushAll.js"></script>
+<script class="javascript">
+dp.SyntaxHighlighter.ClipboardSwf = 'http://active.tutsplus.com/wp-content/plugins/google-syntax-highlighter/Scripts/clipboard.swf';
+dp.SyntaxHighlighter.HighlightAll('code');
+</script>
+
+</body>
+</html>

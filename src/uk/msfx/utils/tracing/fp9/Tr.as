@@ -1,12 +1,12 @@
 /**
  * Tr.ace() by MSFX Matt Stuttard Parker
- * Version 1.6
- * 17.04.2012
+ * Version 2.0
+ * 24.05.2012
  * 
  * Copyright (c) MSFX Matt Stuttard Parker
  * 
  * http://msfx.co.uk
- * http://labs.msfx.co.uk
+ * 
  * 
  * Permission is hereby granted, free of charge, to any person
  * obtaining a copy of this software and associated documentation
@@ -56,6 +56,8 @@ package uk.msfx.utils.tracing.fp9
 	 * <p><b>UPDATE 1.5:</b>  To make the library more accessible and less "verbose" for simple quick use the username and class are now <b>OPTIONAL</b> parameters.</p>
 	 * 
 	 * <p><b>UPDATE 1.6:</b>  Rearchitectured Clipboard (FP10 Branch only) and Logging functionality to work together more sensibly.  To copy to clipboard you must now call Tr.copyLogToClipboard().  You can also clear the log using Tr.clearLog()</p>
+	 * 
+	 * <p><b>UPDATE 2.0:</b>  Introduced TrConsole for both FP9 and FP10 branches allowing user to have a "console window" within the published SWF.  Console supports resizing, repositioning, clearing the log, copying log to clipboard and saving the log to a text file.</p>
 	 * 
 	 * @author MSFX Matt Stuttard Parker
 	 */

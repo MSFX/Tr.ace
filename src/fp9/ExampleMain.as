@@ -1,12 +1,12 @@
 ﻿/**
  * Tr.ace() Example Code by MSFX Matt Stuttard
- * Version 1.6
- * 17.04.2012
+ * Version 2.0
+ * 24.05.2012
  * 
  * Copyright (c) MSFX Matt Stuttard Parker
  * 
  * http://msfx.co.uk
- * http://labs.msfx.co.uk
+ * 
  * 
  * Permission is hereby granted, free of charge, to any person
  * obtaining a copy of this software and associated documentation
@@ -35,6 +35,7 @@ package
 	import flash.events.Event;
 	import flash.text.TextField;
 	import uk.msfx.utils.tracing.fp9.Tr;
+	import uk.msfx.utils.tracing.fp9.TrConsole;
 	import uk.msfx.utils.tracing.users.TrUsers;
 	
 	/**
@@ -48,6 +49,9 @@ package
 	{
 		// dummy test class
 		private var exampleClass:ExampleClass1_FP9;
+		
+		// Tr.ace() library console class
+		private var console:TrConsole;
 		
 		
 		/**
@@ -110,17 +114,23 @@ package
 			// uncomment to add linebreaks between each output
 			//Tr.useLineBreaks = true;
 			
-			// create a textfield to use as the "console"
-			var textfield:TextField = new TextField();
-			textfield.width = stage.stageWidth;
-			textfield.height = stage.stageHeight;
-			addChild(textfield);
-			
-			// uncomment to output all the traces to the textfield NB: If you want to clear the log (the output within the textfield) then look at line 268
-			//Tr.console = textfield;
-			
 			// uncomment to switch tracing off entirely
 			//Tr.enabled = true;
+			
+			
+			
+			/**
+			 * Below is an example of how to setup the Tr.ace() Console.
+			 * 
+			 * All traces made via Tr.ace() after the TrConsole instance has been assigned the Tr.console property will appear within the console.
+			 */
+			
+			// create the TrConsole instance and add it to the stage
+			console = new TrConsole();
+			addChild(console);
+			
+			// assign the "textfield" property of the TrConsole instance initialized above to the Tr.console property
+			Tr.console = console.textfield;
 			
 			
 			
@@ -156,13 +166,13 @@ package
 			/**
 			 * The following demonstrates the use of Tr.aceArray(...) used for the tracing of Arrays.
 			 * 
-			 * First, uncomment line 174 to demonstrate tracing a simple Array using Tr.aceArray(...).
+			 * First, uncomment line 187 to demonstrate tracing a simple Array using Tr.aceArray(...).
 			 * 
-			 * Secondly, uncomment line 180 to demonstrate tracing a more complex Array using Tr.aceArray(...).
+			 * Secondly, uncomment line 194 to demonstrate tracing a more complex Array using Tr.aceArray(...).
 			 * This more complex Array involves several nested Arrays and Objects.
 			 * 
 			 * You can also toggle whether line breaks appear between standard Tr.ace(...) calls and within the Tr.aceArray(...) 
-			 * and Tr.aceObject(...) calls by toggling 'Tr.arrayAndObjectLinebreaks' on line 171
+			 * and Tr.aceObject(...) calls by toggling 'Tr.arrayAndObjectLinebreaks' on line 181.
 			 */
 			
 			
@@ -188,13 +198,13 @@ package
 			/**
 			 * The following demonstrates the use of Tr.aceObjects(...) used for the tracing of Objects
 			 * 
-			 * First, uncomment line 208 to demonstrate tracing a simple Object using Tr.aceObject(...)
+			 * First, uncomment line 218 to demonstrate tracing a simple Object using Tr.aceObject(...)
 			 * 
-			 * Secondly, uncomment line 218 to demonstrate tracing a more complex Object using Tr.aceObject(...).
+			 * Secondly, uncomment line 228 to demonstrate tracing a more complex Object using Tr.aceObject(...).
 			 * This more complex Object involves several nested Arrays and Objects.
 			 * 
 			 * Again, you can also toggle whether line breaks appear between standard Tr.ace(...) calls and within 
-			 * the Tr.aceArray(...) and Tr.aceObject(...) calls by toggling 'Tr.arrayAndObjectLinebreaks' on line 161
+			 * the Tr.aceArray(...) and Tr.aceObject(...) calls by toggling 'Tr.arrayAndObjectLinebreaks' on line 181
 			 */
 			
 			// create a simple object
@@ -222,7 +232,7 @@ package
 			/**
 			 * This example demonstrates the use of Tr.aceMulti(...) used for tracing a list of multiple arguments
 			 * 
-			 * Uncomment line 235 to demonstrate a tracing of a String, the addition of two integers, an Array and an Object all 
+			 * Uncomment line 245 to demonstrate a tracing of a String, the addition of two integers, an Array and an Object all 
 			 * from one statement on one line.
 			 */
 			
@@ -240,10 +250,10 @@ package
 			/**
 			 * This example demonstrates the use of Tr.ace(...) without the username or class parameters (now optional from Tr.ace() v1.5)
 			 * 
-			 * Uncomment line 252 to demonstrate Tr.ace(...) tracing a string without the username or class parameter
-			 * Uncomment line 253 to demonstrate Tr.aceArray(...) tracing an array without the username or class parameter
-			 * Uncomment line 254 to demonstrate Tr.aceObject(...) tracing an object without the username or class parameter
-			 * Uncomment line 255 to demonstrate Tr.aceMulti(...) tracing multiple values without the username or class parameter
+			 * Uncomment line 262 to demonstrate Tr.ace(...) tracing a string without the username or class parameter
+			 * Uncomment line 263 to demonstrate Tr.aceArray(...) tracing an array without the username or class parameter
+			 * Uncomment line 264 to demonstrate Tr.aceObject(...) tracing an object without the username or class parameter
+			 * Uncomment line 265 to demonstrate Tr.aceMulti(...) tracing multiple values without the username or class parameter
 			 * 
 			 * NB: Using Tr.ace() without users/classes does remove alot of "the power" from the library with regards to restricting 
 			 * traces to specific users or classes but options such as the console will still function fully.
@@ -259,13 +269,13 @@ package
 			/**
 			 * This example demonstrates how to clear the log, useful if you're outputting "the console"
 			 * 
-			 * Uncomment line 268 to clear the log
+			 * Uncomment line 278 to clear the log (and console if being used)
 			 * 
 			 * NB:  The name of the textfield is automatically created as a timestamp
 			 */
 			
-			// uncomment to clear the log
-			Tr.clearLog();
+			// uncomment to clear the log (and the console if being used)
+			//Tr.clearLog();
 			
 		}
 		

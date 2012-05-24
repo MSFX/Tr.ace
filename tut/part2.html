@@ -1,0 +1,132 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Tr.ace()!</title>
+
+	<link rel="stylesheet" href="style/style.css" type="text/css" media="screen" />	
+	<link rel="stylesheet" href="style/syntaxHighlighter.css" type="text/css" media="screen" />	
+	<link rel="shortcut icon" href="http://marketplace.tutsplus.com/favicons/tutsmarketplace.ico"/>
+</head>
+
+<body>
+<div id="container">
+<div id="top">
+    <a href="http://marketplace.tutsplus.com"><img src="http://themeforest.net/images/tutsmarketplace/logo-dark.png" id="logo" /></a>
+    
+    <img src="images/preview.gif" name="preview" id="preview"/>
+  	<h2>Tr.ace() 2.0 - Squash Those Bugs!</h2>
+	<h4>By: MSFX</h4>
+  	<p>Tr.ace() v2.0 introduces several new features including the much requested &quot;textfield console&quot; to help you squash those bugs once and for all!</p>
+	
+</div>
+
+<div id="content">
+	
+	<h3>New to Tr.ace()?</h3>
+	
+	<p>Tr.ace() was released nearly a year ago <a href="http://active.tutsplus.com/tutorials/actionscript/exclusive-freebie-tr-ace-an-excellent-as3-debugging-utility/" target="_blank">as an Exclusive Freebie on  ActiveTuts</a> and is an open source debugging utility for Flash that allowed you to restrict the traces shown within your application to particular users or classes or even both. You could also add linebreaks, timestamps and trace nested arrays and objects neatly with one line of code!</p>
+<p>Let's take a look at what's changed since Tr.ace() was first released...</p>
+<hr />
+    <h3>By Popular Demand - The Tr.ace() Console</h3>
+	
+	<p>The Tr.ace() library now features a class titled &quot;TrConsole&quot; which provides you with a basic console within your SWF which you can view all your traces via Tr.ace() through!</p>
+	
+    
+	<div class="tutorial_image"><img src="images/trace-update.gif" alt="code snippets menu" /></div>
+	
+    <p>You can clear the console, copy the output to the clipboard and save the output to a text file. You can also minimize the console to reduce the space taken up on screen as well as move it around the screen by simply dragging it. It's also fully resizable!</p>
+    <p>To take advantage of this feature you only need three lines of code!</p>
+    
+    
+	<pre name="code" class="javascript">
+// create the TrConsole instance and add it to the stage
+var console:TRConsole = new TrConsole();
+addChild(console);
+
+// assign the "textfield" property of the TrConsole instance initialized above to the Tr.console property
+Tr.console = console.textfield;
+		 
+	</pre>
+    
+    <p>And that's it! Easy! </p>
+    
+    
+    <hr />
+    <h3>Also by Popular Demand - Optional Username &amp; Class Parameters!</h3>
+	
+	<p>When Tr.ace() was intially released the username and class parameters were required for all trace calls whether you wanted to use them or not. You'll be happy to know that they are now optional! </p>
+
+	<p>This does reduce some of the functionality of the library but if you're just wanting to see your traces via the console then you're able to without the bloat of the rest of the library.</p>
+	<p>With Parameters:</p>
+    
+	<pre name="code" class="javascript">
+Tr.ace("with parameters", TrUsers.MSFX, ClassName);
+		 
+	</pre>
+    
+    <p>Without Parameters!</p>
+    
+    
+	<pre name="code" class="javascript">
+Tr.ace("without parameters!");
+		 
+	</pre>
+    
+	<p>This will hopefully make the library more accessible and less "verbose" for tracers everywhere!</p>
+    
+	
+    <hr />
+    <h3>Manually Clear / Copy and Save your traces</h3>
+
+	<p>Via the console featured above you can clear, copy to clipboard and save the current trace log.</p>
+	<p>For those who aren't using the console you can also achieve these via calls to the Tr class as shown below...</p>
+	
+	<pre name="code" class="javascript">
+// to clear the trace log
+Tr.clearLog();
+
+// to copy to the clipboard
+Tr.copyLogToClipboard();
+
+// to save the log as a text file with timestamp
+Tr.saveLog();
+	</pre>
+    
+	<p>The clipboard functionality must be triggered via a user interaction, <a href="http://help.adobe.com/en_US/FlashPlatform/reference/actionscript/3/flash/desktop/Clipboard.html" target="_blank">as detailed here</a>.</p>
+    
+    <hr /><h3>Downloading Tr.ace()</h3>
+
+	<p>Tr.ace() is an open source library that's available to download <a href="files/Trace.zip">here at ActiveTuts in ZIP format</a> and also available as a public repository <a href="https://github.com/MSFX">on my GitHub</a> for those a little more Nerdy or who wish to Fork and/or contribute towards the Tr.ace() library.</p>
+	
+    <p>The library is AS3 only and has two seperate repositories developed for both Flash Player 9 and Flash Player 10+</p>
+    
+	<p>To use the Tr.ace() library you must download one of the above source packages and copy and paste the 'uk' directory, located within the 'src' directory, into your global classpath directory.  You're then all set to go!</p>
+<hr />
+	
+	<h3>Documentation for Tr.ace()</h3>
+	
+	<p>Within the download package you'll find a 'docs' directory, open the 'index.html' file to view the ASDocs generated Documentation for Tr.ace().  You can also find the documentation online: <a href="http://docs.msfx.co.uk/as3/trace/">http://docs.msfx.co.uk/as3/trace/</a>.</p>
+	
+	
+	<hr />
+	
+	<h3>Happy Tracing!</h3>
+	
+    <p>So, that's it really.  If you have any questions or suggestions for the library feel free to get in touch in the comments.</p>
+    
+    <p>Happy Tracing!</p>
+	
+</div>
+</div>
+
+<!--Syntax Highlighter-->
+<script class="javascript" src="http://active.tutsplus.com/wp-content/plugins/google-syntax-highlighter/Scripts/shCore.js"></script>
+<script class="javascript" src="http://active.tutsplus.com/wp-content/plugins/google-syntax-highlighter/Scripts/shBrushAll.js"></script>
+<script class="javascript">
+dp.SyntaxHighlighter.ClipboardSwf = 'http://active.tutsplus.com/wp-content/plugins/google-syntax-highlighter/Scripts/clipboard.swf';
+dp.SyntaxHighlighter.HighlightAll('code');
+</script>
+
+</body>
+</html>

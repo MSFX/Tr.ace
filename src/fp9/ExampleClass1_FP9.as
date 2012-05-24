@@ -1,12 +1,12 @@
 /**
  * Tr.ace() Example Code by MSFX Matt Stuttard
- * Version 1.4
- * 02.04.2012
+ * Version 2.0
+ * 24.05.2012
  * 
  * Copyright (c) MSFX Matt Stuttard Parker
  * 
  * http://msfx.co.uk
- * http://labs.msfx.co.uk
+ * 
  * 
  * Permission is hereby granted, free of charge, to any person
  * obtaining a copy of this software and associated documentation

@@ -1,12 +1,12 @@
 ﻿/**
  * Tr.ace() Example Code by MSFX Matt Stuttard
- * Version 1.6
- * 17.04.2012
+ * Version 2.0
+ * 24.05.2012
  * 
  * Copyright (c) MSFX Matt Stuttard Parker
  * 
  * http://msfx.co.uk
- * http://labs.msfx.co.uk
+ * 
  * 
  * Permission is hereby granted, free of charge, to any person
  * obtaining a copy of this software and associated documentation
@@ -36,6 +36,7 @@ package
 	import flash.net.FileReference;
 	import flash.text.TextField;
 	import uk.msfx.utils.tracing.fp10.Tr;
+	import uk.msfx.utils.tracing.fp10.TrConsole;
 	import uk.msfx.utils.tracing.users.TrUsers;
 	
 	/**
@@ -50,6 +51,8 @@ package
 		// dummy test class
 		private var exampleClass:ExampleClass1;
 		
+		// Tr.ace() library console class
+		private var console:TrConsole;
 		
 		/**
 		 * Constructor.
@@ -111,20 +114,24 @@ package
 			// uncomment to add linebreaks between each output
 			//Tr.useLineBreaks = true;
 			
-			// create a textfield to use as the "console"
-			var textfield:TextField = new TextField();
-			textfield.width = stage.stageWidth;
-			textfield.height = stage.stageHeight;
-			addChild(textfield);
-			
-			// uncomment to output all the traces to the textfield
-			//Tr.console = textfield;
-			
-			// NB: To preview the new 'log' features, uncomment the line(s) at the bottom of this function (line 271)
-			
-			
 			// uncomment to switch tracing off entirely
 			//Tr.enabled = false;
+			
+			
+			
+			/**
+			 * Below is an example of how to setup the Tr.ace() Console.
+			 * 
+			 * All traces made via Tr.ace() after the TrConsole instance has been assigned the Tr.console property will appear within the console.
+			 */
+			
+			// create the TrConsole instance and add it to the stage
+			console = new TrConsole();
+			addChild(console);			console.x = ((stage.stageWidth - console.width) * 0.5);			console.y = ((stage.stageHeight- console.height) * 0.5);
+			
+			// assign the "textfield" property of the TrConsole instance initialized above to the Tr.console property
+			Tr.console = console.textfield;
+			
 			
 			
 			
@@ -151,20 +158,20 @@ package
 			addChild(exampleClass);
 			
 			// one final last trace from the user 'FLASH_DEVELOP'
-			Tr.ace("This is the last Tr.ace(...) call (appears in red if using FlashDevelop!)", TrUsers.FLASH_DEVELOP, Object(this).constructor);
+			//Tr.ace("This is the last Tr.ace(...) call (appears in red if using FlashDevelop!)", TrUsers.FLASH_DEVELOP, Object(this).constructor);
 			
 			
 			
 			/**
 			 * The following demonstrates the use of Tr.aceArray(...) used for the tracing of Arrays.
 			 * 
-			 * First, uncomment line 182 to demonstrate tracing a simple Array using Tr.aceArray(...).
+			 * First, uncomment line 186 to demonstrate tracing a simple Array using Tr.aceArray(...).
 			 * 
-			 * Secondly, uncomment line 189 to demonstrate tracing a more complex Array using Tr.aceArray(...).
+			 * Secondly, uncomment line 193 to demonstrate tracing a more complex Array using Tr.aceArray(...).
 			 * This more complex Array involves several nested Arrays and Objects.
 			 * 
 			 * You can also toggle whether line breaks appear between standard Tr.ace(...) calls and within the Tr.aceArray(...) 
-			 * and Tr.aceObject(...) calls by toggling 'Tr.arrayAndObjectLinebreaks' on line 176
+			 * and Tr.aceObject(...) calls by toggling 'Tr.arrayAndObjectLinebreaks' on line 180
 			 */
 			
 			
@@ -190,13 +197,13 @@ package
 			/**
 			 * The following demonstrates the use of Tr.aceObjects(...) used for the tracing of Objects
 			 * 
-			 * First, uncomment line 213 to demonstrate tracing a simple Object using Tr.aceObject(...)
+			 * First, uncomment line 217 to demonstrate tracing a simple Object using Tr.aceObject(...)
 			 * 
-			 * Secondly, uncomment line 223 to demonstrate tracing a more complex Object using Tr.aceObject(...).
+			 * Secondly, uncomment line 227 to demonstrate tracing a more complex Object using Tr.aceObject(...).
 			 * This more complex Object involves several nested Arrays and Objects.
 			 * 
 			 * Again, you can also toggle whether line breaks appear between standard Tr.ace(...) calls and within 
-			 * the Tr.aceArray(...) and Tr.aceObject(...) calls by toggling 'Tr.arrayAndObjectLinebreaks' on line 176
+			 * the Tr.aceArray(...) and Tr.aceObject(...) calls by toggling 'Tr.arrayAndObjectLinebreaks' on line 180
 			 */
 			
 			// create a simple object
@@ -224,7 +231,7 @@ package
 			/**
 			 * This example demonstrates the use of Tr.aceMulti(...) used for tracing a list of multiple arguments
 			 * 
-			 * Uncomment line 240 to demonstrate a tracing of a String, the addition of two integers, an Array and an Object all 
+			 * Uncomment line 244 to demonstrate a tracing of a String, the addition of two integers, an Array and an Object all 
 			 * from one statement on one line.
 			 */
 			
@@ -241,10 +248,10 @@ package
 			/**
 			 * This example demonstrates the use of Tr.ace(...) without the username or class parameters (now optional from Tr.ace() v1.5)
 			 * 
-			 * Uncomment line 253 to demonstrate Tr.ace(...) tracing a string without the username or class parameter
-			 * Uncomment line 254 to demonstrate Tr.aceArray(...) tracing an array without the username or class parameter
-			 * Uncomment line 255 to demonstrate Tr.aceObject(...) tracing an object without the username or class parameter
-			 * Uncomment line 256 to demonstrate Tr.aceMulti(...) tracing multiple values without the username or class parameter
+			 * Uncomment line 260 to demonstrate Tr.ace(...) tracing a string without the username or class parameter
+			 * Uncomment line 261 to demonstrate Tr.aceArray(...) tracing an array without the username or class parameter
+			 * Uncomment line 262 to demonstrate Tr.aceObject(...) tracing an object without the username or class parameter
+			 * Uncomment line 263 to demonstrate Tr.aceMulti(...) tracing multiple values without the username or class parameter
 			 * 
 			 * NB: Using Tr.ace() without users/classes does remove alot of "the power" from the library with regards to restricting 
 			 * traces to specific users or classes but options such as the console will still function fully.
@@ -260,9 +267,9 @@ package
 			/**
 			 * This example demonstrates how to output the log as a textfile, how to copy the log to the Clipboard and how to clear the log.
 			 * 
-			 * Uncomment line 271 to save the log file out automatically once all the traces have been made
-			 * Uncomment line 274 to copy to the clipboard
-			 * Uncomment line 277 to clear the log
+			 * Uncomment line 278 to save the log file out automatically once all the traces have been made
+			 * Uncomment line 281 to copy to the clipboard
+			 * Uncomment line 284 to clear the log (and console if being used)
 			 * 
 			 * NB:  The name of the textfield is automatically created as a timestamp
 			 */
@@ -273,7 +280,7 @@ package
 			// uncomment to copy the log the clipboard
 			//Tr.copyLogToClipboard();
 			
-			// uncomment to clear the log
+			// uncomment to clear the log (and console if being used)
 			//Tr.clearLog();
 			
 		}
