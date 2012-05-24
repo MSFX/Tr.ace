@@ -10,6 +10,8 @@ The output can also be output to a textfield within your application to allow a 
 
 For those using FlashDevelop you can prefix your username with "0:", "1:", "2:", "3:", or "4:" to trace in a different colour within the FlashDevelop output console, as shown with the 'FLASH_DEVELOP' username
 
+New in version 2.0 is the TrConsole allowing you to view your traces within a console within your live application.
+
 
 The main functions are:
 

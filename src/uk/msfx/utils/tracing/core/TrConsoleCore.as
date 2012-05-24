@@ -40,9 +40,7 @@ package uk.msfx.utils.tracing.core
 	
 	
 	/**
-	 * Tr.ace() Console Core.
-	 * 
-	 *<p>Provides the core resize/reposition/ui functionality of the console, the actual integration with Tr.ace() occurs within the relevant TrConsole class depending on which branch you're using (FP9/10).</p>
+	 * Tr.ace Console Core.
 	 * 
 	 * @author MSFX Matt Stuttard Parker
 	 */
@@ -191,14 +189,14 @@ package uk.msfx.utils.tracing.core
 				clipboardButton.addChild(label);
 			}
 			
-			// show/hide
+			// show or hide
 			minimizeButton = new Sprite();
 			minimizeButton.buttonMode = minimizeButton.useHandCursor = true;
 			minimizeButton.mouseChildren = false;
 			minimizeButton.y = spacing;
 			minimizeButton.name = "minimizeButton";
 			
-			// show/hide label
+			// show or hide label
 			label = new TextField();
 			label.text = "Show / Hide";
 			label.width = label.textWidth + 5;
@@ -242,7 +240,7 @@ package uk.msfx.utils.tracing.core
 		 * 
 		 * @param	width			Width of the background to draw
 		 * @param	height			Height of the background to draw
-		 * @param	resizeAfter		<b>OPTIONAL</b> Whether to resize after drawing background
+		 * @param	resizeAfter		OPTIONAL Whether to resize after drawing background.
 		 */
 		protected function drawBackground(width:int, height:int, resizeAfter:Boolean = true):void 
 		{
