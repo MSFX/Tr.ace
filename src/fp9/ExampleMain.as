@@ -1,7 +1,7 @@
 ﻿/**
  * Tr.ace() Example Code by MSFX Matt Stuttard
  * Version 2.0
- * 24.05.2012
+ * 10.06.2012
  * 
  * Copyright (c) MSFX Matt Stuttard Parker
  * 
@@ -123,15 +123,15 @@ package
 			 * Below is an example of how to setup the Tr.ace() Console.
 			 * 
 			 * All traces made via Tr.ace() after the TrConsole instance has been assigned the Tr.console property will appear within the console.
+			 * 
+			 * You can also change the background and stroke colours should you wish to via "console.backgroundColour" and "console.strokeColour".
 			 */
 			
-			// create the TrConsole instance and add it to the stage
+			// create the TrConsole instance, center it and then add it to the stage... that's it!
 			console = new TrConsole();
+			console.x = ((stage.stageWidth - console.width) * 0.5);			
+			console.y = ((stage.stageHeight- console.height) * 0.5);
 			addChild(console);
-			
-			// assign the "textfield" property of the TrConsole instance initialized above to the Tr.console property
-			Tr.console = console.textfield;
-			
 			
 			
 			/**

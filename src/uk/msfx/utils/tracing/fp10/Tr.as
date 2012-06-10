@@ -1,7 +1,7 @@
 /**
  * Tr.ace() by MSFX Matt Stuttard Parker
  * Version 2.0
- * 24.05.2012
+ * 10.06.2012
  * 
  * Copyright (c) MSFX Matt Stuttard Parker
  * 
@@ -81,6 +81,7 @@ package uk.msfx.utils.tracing.fp10
 		private static var _useLineBreaks:Boolean;
 		
 		// file reference variable used to save log with
+		/** @private **/
 		protected static var file:FileReference;
 		
 		
@@ -212,9 +213,7 @@ package uk.msfx.utils.tracing.fp10
 		
 		
 		/**
-		 * Assign a Textfield as a "console" to output the traces to.
-		 * 
-		 * <p>You can then position this textfield wherever you wish and toggle it visible etc to mimic a "real console".</p>
+		 * Manually assign a Textfield as a "console" to output the traces to (not recommended).  Use TrConsole instead.
 		 */
 		static public function get console():TextField{ return core.console; }
 		

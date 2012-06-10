@@ -1,11 +1,14 @@
 /**
  * Tr.ace() by MSFX Matt Stuttard Parker
  * Version 2.0
- * 24.05.2012
+ * 10.06.2012
  * 
  * Copyright (c) MSFX Matt Stuttard Parker
  * 
  * http://msfx.co.uk
+ * 
+ * Thanks to @MichaelJW for ideas and testing with TrConsole.
+ * 
  * 
  * 
  * Permission is hereby granted, free of charge, to any person
@@ -45,18 +48,23 @@ package uk.msfx.utils.tracing.fp9
 	public class TrConsole extends TrConsoleCore 
 	{
 		/**
-		 * Constructor for Tr.ace() Console
+		 * Constructor for Tr.ace() Console.
 		 * 
-		 * @param	width		The width of the console.
-		 * @param	height		The height of the console.
+		 * @param	width					The width of the console.
+		 * @param	height					The height of the console.
+		 * @param	transparentOnHide		OPTIONAL Whether to make the console transparent when minimizing.
 		 */
-		public function TrConsole(width:int = 600, height:int = 200) 
+		public function TrConsole(width:int = 600, height:int = 200, transparentOnHide:Boolean = false) 
 		{
-			super(width, height, false);
+			super(width, height, false, transparentOnHide);
+			
+			// connect to the Tr.ace() library to save assigning manually
+			Tr.console = _textfield;
 		}
 		
 		/**
 		 * Mouse Event Handler.
+		 * @private
 		 * 
 		 * @param	e	MouseEvent.CLICK
 		 */

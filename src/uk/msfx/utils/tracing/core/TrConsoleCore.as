@@ -1,7 +1,7 @@
 /**
  * Tr.ace() by MSFX Matt Stuttard Parker
  * Version 2.0
- * 24.05.2012
+ * 10.06.2012
  * 
  * Copyright (c) MSFX Matt Stuttard Parker
  * 
@@ -46,43 +46,78 @@ package uk.msfx.utils.tracing.core
 	 */
 	public class TrConsoleCore extends Sprite 
 	{
-		protected var _textfield:TextField;
+		/**
+		 * Minimum Width of the console.
+		 */
+		protected const MINIMUM_WIDTH:int = 450;
 		
-		protected var headerButton:Sprite;
-		protected var clearButton:Sprite;
-		protected var saveButton:Sprite;
-		protected var clipboardButton:Sprite;
-		protected var minimizeButton:Sprite;
-		protected var resizeButton:Sprite;
+		/**
+		 * Minimum Height of the console.
+		 */
+		protected const MINIMUM_HEIGHT:int = 200;
 		
-		protected var spacing:uint = 10;
 		
-		protected var mousePositionDiffX:int = 0;
-		protected var mousePositionDiffY:int = 0;
-		
-		protected var background:Sprite;
-		
-		protected var resizing:Boolean;
-		protected var saveAndClipboard:Boolean;
-		
+		/** @private **/
+		protected var _textfield:TrTextField;
+		/** @private **/
+		protected var _backgroundColour:uint = 0xFFFFFF;
+		/** @private **/
+		protected var _strokeColour:uint = 0xBBBBBB;
+		/** @private **/
+		protected var _autoscroll:Boolean = true;
+		/** @private **/
 		protected var _showing:Boolean = true;
+		
+		/** @private **/
+		protected var headerButton:Sprite;
+		/** @private **/
+		protected var clearButton:Sprite;
+		/** @private **/
+		protected var saveButton:Sprite;
+		/** @private **/
+		protected var clipboardButton:Sprite;
+		/** @private **/
+		protected var minimizeButton:Sprite;
+		/** @private **/
+		protected var resizeButton:Sprite;
+		/** @private **/
+		protected var closeButton:Sprite;
+		/** @private **/
+		protected var spacing:uint = 10;
+		/** @private **/
+		protected var mousePositionDiffX:int = 0;
+		/** @private **/
+		protected var mousePositionDiffY:int = 0;
+		/** @private **/
+		protected var background:Sprite;
+		/** @private **/
+		protected var resizing:Boolean;
+		/** @private **/
+		protected var saveAndClipboard:Boolean;
+		/** @private **/
+		protected var transparentOnHide:Boolean;
+		/** @private **/
+		protected var transparentOnHideAmount:Number = 0.5;
+		
 		
 		/**
 		 * Constructor.
 		 * 
 		 * @param	width					The width of the console.
 		 * @param	height					The height of the console.
-		 * @param	saveAndClipboard		Whether to have the Clipboard and Save buttons.
+		 * @param	saveAndClipboard		OPTIONAL Whether to have the Clipboard and Save buttons.
+		 * @param	transparentOnHide		OPTIONAL Whether to make the console transparent when minimizing.
 		 */
-		public function TrConsoleCore(width:int = 600, height:int = 200, saveAndClipboard:Boolean = true) 
+		public function TrConsoleCore(width:int = 600, height:int = 200, saveAndClipboard:Boolean = true, transparentOnHide:Boolean = false) 
 		{
 			this.saveAndClipboard = saveAndClipboard;
+			this.transparentOnHide = transparentOnHide;
 			
 			// setup the labels and buttons etc
 			setupUI();
 			
 			// draw the background
-			drawBackground(width, height);
+			drawBackground(Math.max(MINIMUM_WIDTH, width), Math.max(MINIMUM_HEIGHT, height));
 			
 			// listen for adding to stage
 			addEventListener(Event.ADDED_TO_STAGE, added);
@@ -94,7 +129,7 @@ package uk.msfx.utils.tracing.core
 		public function hide():void 
 		{
 			_showing = resizeButton.visible = _textfield.visible = false;
-			drawBackground(width - 1, (spacing * 2) + headerButton.height, false); // -1 for stroke
+			drawBackground(width - 1, (spacing * 2) + headerButton.height, false, transparentOnHide); // -1 for stroke
 		}
 		
 		/**
@@ -108,6 +143,7 @@ package uk.msfx.utils.tracing.core
 		
 		/**
 		 * Setup the UI components for the console.
+		 * @private
 		 */
 		protected function setupUI():void 
 		{
@@ -127,14 +163,14 @@ package uk.msfx.utils.tracing.core
 			
 			// header label
 			label = new TextField();
-			label.text = "Tr.ace() Console by MSFX";
+			label.htmlText = "<p><font color=\"#0080aa\">Tr</font>.ace(<font color=\"#a31515\">\"Version 2.0\"</font><font color=\"#000000\">)</font></p>";
 			label.width = label.textWidth + 5;
 			label.height = label.textHeight + 5;
-			label.textColor = 0xBBBBBB;
 			headerButton.addChild(label);
 			
+			
 			// setup the console textfield
-			_textfield = new TextField();
+			_textfield = new TrTextField();
 			_textfield.x = spacing;
 			_textfield.y = headerButton.y + headerButton.height + spacing;
 			_textfield.borderColor = 0xEEEEEE;
@@ -204,6 +240,21 @@ package uk.msfx.utils.tracing.core
 			label.textColor = 0xBBBBBB;
 			minimizeButton.addChild(label);
 			
+			// close
+			closeButton = new Sprite();
+			closeButton.buttonMode = closeButton.useHandCursor = true;
+			closeButton.mouseChildren = false;
+			closeButton.y = spacing;
+			closeButton.name = "closeButton";
+			
+			// close label
+			label = new TextField();
+			label.text = "Close";
+			label.width = label.textWidth + 5;
+			label.height = label.textHeight + 5;
+			label.textColor = 0xBBBBBB;
+			closeButton.addChild(label);
+			
 			// resize button
 			resizeButton = new Sprite();
 			resizeButton.buttonMode = resizeButton.useHandCursor = true;
@@ -232,22 +283,25 @@ package uk.msfx.utils.tracing.core
 			}
 			
 			addChild(minimizeButton);
+			addChild(closeButton);
 			addChild(resizeButton);
 		}
 		
 		/**
 		 * Draw the background and then call resize handler to reposition components (default).
+		 * @private
 		 * 
-		 * @param	width			Width of the background to draw
-		 * @param	height			Height of the background to draw
-		 * @param	resizeAfter		OPTIONAL Whether to resize after drawing background.
+		 * @param	width					Width of the background to draw
+		 * @param	height					Height of the background to draw
+		 * @param	resizeAfter				OPTIONAL Whether to resize after drawing background.
+		 * @param	transparentOnHide		OPTIONAL Whether to make the console transparent when minimizing.
 		 */
-		protected function drawBackground(width:int, height:int, resizeAfter:Boolean = true):void 
+		protected function drawBackground(width:int, height:int, resizeAfter:Boolean = true, transparentOnHide:Boolean = false):void 
 		{
 			// clear and redraw background
 			background.graphics.clear();
-			background.graphics.lineStyle(1, 0xBBBBBB, 1, true);
-			background.graphics.beginFill(0xFFFFFF);
+			background.graphics.lineStyle(1, _strokeColour, 1, true);
+			background.graphics.beginFill(_backgroundColour, (transparentOnHide)? transparentOnHideAmount : 1);
 			background.graphics.drawRoundRect(0, 0, width, height, 10);
 			background.graphics.endFill();
 			
@@ -257,20 +311,23 @@ package uk.msfx.utils.tracing.core
 		
 		/**
 		 * Resize Handler.
+		 * @private
 		 */
 		protected function resizeHandler():void 
 		{
 			// buttons
 			if (saveAndClipboard)
 			{
-				minimizeButton.x = width - spacing - minimizeButton.width;
+				closeButton.x = width - spacing - closeButton.width;
+				minimizeButton.x = closeButton.x - spacing - minimizeButton.width;
 				saveButton.x = minimizeButton.x - spacing - saveButton.width;
 				clipboardButton.x = saveButton.x - spacing - clipboardButton.width;
 				clearButton.x = clipboardButton.x - spacing - clearButton.width;
 			}
 			else
 			{
-				minimizeButton.x = width - spacing - minimizeButton.width;
+				closeButton.x = width - spacing - closeButton.width;
+				minimizeButton.x = closeButton.x - spacing - minimizeButton.width;
 				clearButton.x = minimizeButton.x - spacing - clearButton.width;
 			}
 			
@@ -285,6 +342,7 @@ package uk.msfx.utils.tracing.core
 		
 		/**
 		 * Added To Stage Event Handler.
+		 * @private
 		 * 
 		 * @param	e	Event.ADDED_TO_STAGE
 		 */
@@ -298,6 +356,7 @@ package uk.msfx.utils.tracing.core
 			headerButton.addEventListener(MouseEvent.CLICK, mouseEventHandler);
 			clearButton.addEventListener(MouseEvent.CLICK, mouseEventHandler);
 			minimizeButton.addEventListener(MouseEvent.CLICK, mouseEventHandler);
+			closeButton.addEventListener(MouseEvent.CLICK, mouseEventHandler);
 			
 			if (saveAndClipboard)
 			{
@@ -307,14 +366,17 @@ package uk.msfx.utils.tracing.core
 			
 			resizeButton.addEventListener(MouseEvent.MOUSE_DOWN, resizeAndRepositionMouseEventHandler);
 			background.addEventListener(MouseEvent.MOUSE_DOWN, resizeAndRepositionMouseEventHandler);
+			
+			if (_autoscroll) _textfield.addEventListener(Event.CHANGE, textfieldChangeEventHandler);
 		}
 		
 		/**
-		 * Removed From Stage Event Handler
+		 * Removed From Stage Event Handler.
+		 * @private
 		 * 
 		 * @param	e	Event.REMOVED_FROM_STAGE
 		 */
-		protected function removed(e:Event):void 
+		protected function removed(e:Event = null):void 
 		{
 			// listen for re-adding
 			removeEventListener(Event.REMOVED_FROM_STAGE, removed);
@@ -324,6 +386,7 @@ package uk.msfx.utils.tracing.core
 			headerButton.removeEventListener(MouseEvent.CLICK, mouseEventHandler);
 			clearButton.removeEventListener(MouseEvent.CLICK, mouseEventHandler);
 			minimizeButton.removeEventListener(MouseEvent.CLICK, mouseEventHandler);
+			closeButton.removeEventListener(MouseEvent.CLICK, mouseEventHandler);
 			
 			if (saveAndClipboard)
 			{
@@ -333,10 +396,13 @@ package uk.msfx.utils.tracing.core
 			
 			resizeButton.removeEventListener(MouseEvent.MOUSE_DOWN, resizeAndRepositionMouseEventHandler);
 			background.removeEventListener(MouseEvent.MOUSE_DOWN, resizeAndRepositionMouseEventHandler);
+			
+			if (_autoscroll) _textfield.removeEventListener(Event.CHANGE, textfieldChangeEventHandler);
 		}
 		
 		/**
-		 * Mouse Event Handler for Resizing and Repositioning the "Console Window"
+		 * Mouse Event Handler for Resizing and Repositioning the "Console Window".
+		 * @private
 		 * 
 		 * @param	e	MouseEvent.MOUSE_DOWN
 		 * @param	e	MouseEvent.MOUSE_MOVE
@@ -392,8 +458,8 @@ package uk.msfx.utils.tracing.core
 					if (resizing)
 					{
 						// reposition the resize button
-						resizeButton.x = this.mouseX - mousePositionDiffX;
-						resizeButton.y = this.mouseY - mousePositionDiffY;
+						resizeButton.x = Math.max(MINIMUM_WIDTH - resizeButton.width - (spacing * 0.5) - 0, this.mouseX - mousePositionDiffX); // -1 for stroke
+						resizeButton.y = Math.max(MINIMUM_HEIGHT - resizeButton.height - (spacing * 0.5) - 0, this.mouseY - mousePositionDiffY); // -1 for stroke
 						
 						// and then redraw the background to take into account new resize button position
 						drawBackground(resizeButton.x + (spacing * 0.5) + resizeButton.width, resizeButton.y + (spacing * 0.5) + resizeButton.height);
@@ -410,6 +476,7 @@ package uk.msfx.utils.tracing.core
 		
 		/**
 		 * Mouse Leave Event Handler.
+		 * @private
 		 * 
 		 * <p>Mimicks the behaviour of MouseEvent.MOUSE_UP when user leaves the stage.</p>
 		 * 
@@ -428,7 +495,22 @@ package uk.msfx.utils.tracing.core
 		}
 		
 		/**
+		 * TextField Change Event Handler.
+		 * @private
+		 * 
+		 * @param	e	Event.CHANGE
+		 */
+		protected function textfieldChangeEventHandler(e:Event):void 
+		{
+			// scroll to the bottom of the textfield
+			_textfield.scrollV = _textfield.numLines;
+		}
+		
+		/**
 		 * Mouse Event Handler.
+		 * @private
+		 * 
+		 * <p>Default behaviours for Minimize, Close and clicking Header.</p>
 		 * 
 		 * <p>Overridden to provide behaviours for clear, clipboard and save.</p>
 		 * 
@@ -445,6 +527,10 @@ package uk.msfx.utils.tracing.core
 				case "headerButton":
 					navigateToURL(new URLRequest("http://msfx.co.uk/category/open-source/"), "_blank");
 				break;
+				
+				case "closeButton":
+					parent.removeChild(this);
+				break;
 			}
 		}
 		
@@ -456,12 +542,52 @@ package uk.msfx.utils.tracing.core
 		
 		
 		/** @private **/
-		public function get textfield():TextField { return _textfield; }
+		public function get textfield():TrTextField { return _textfield; }
+		
+		/** @private **/
+		public function get autoscroll():Boolean { return _autoscroll; }
+		
 		
 		/**
-		 * The textfield to ouput the traces to
+		 * Whether the textfield will autoscroll when new traces made.
 		 */
-		public function set textfield(value:TextField):void { _textfield = value; }
+		public function set autoscroll(value:Boolean):void 
+		{ 
+			_autoscroll = value; 
+			
+			// add / remove change handler from textfield
+			if (_autoscroll)
+			{
+				_textfield.addEventListener(Event.CHANGE, textfieldChangeEventHandler);
+			}
+			else
+			{
+				_textfield.removeEventListener(Event.CHANGE, textfieldChangeEventHandler);
+			}
+		}
+		
+		/**
+		 * The textfield to ouput the traces to.
+		 */
+		public function set textfield(value:TrTextField):void { _textfield = value; }
+		
+		/**
+		 * The background colour for the console.
+		 */
+		public function set backgroundColour(value:uint):void 
+		{
+			_backgroundColour = value;
+			drawBackground(width - 1, resizeButton.y + (spacing * 0.5) + resizeButton.height); // -1 for stroke
+		}
+		
+		/**
+		 * The stroke colour for the console.
+		 */
+		public function set strokeColour(value:uint):void 
+		{
+			_strokeColour = value;
+			drawBackground(width - 1, resizeButton.y + (spacing * 0.5) + resizeButton.height); // -1 for stroke
+		}
 		
 		
 		/** @private **/
@@ -472,6 +598,7 @@ package uk.msfx.utils.tracing.core
 		
 		
 		/**
+		 * @private
 		 * Redraw background if resized
 		 */
 		override public function set height(value:Number):void 
@@ -480,12 +607,14 @@ package uk.msfx.utils.tracing.core
 		}
 		
 		/**
+		 * @private
 		 * Redraw background if resized
 		 */
 		override public function set width(value:Number):void 
 		{
 			drawBackground(value, height);
 		}
+		
 		
 	}
 }

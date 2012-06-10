@@ -1,7 +1,7 @@
 /**
  * Tr.ace() by MSFX Matt Stuttard Parker
  * Version 2.0
- * 24.05.2012
+ * 10.06.2012
  * 
  * Copyright (c) MSFX Matt Stuttard Parker
  * 
@@ -175,7 +175,7 @@ package uk.msfx.utils.tracing.fp9
 		
 		
 		/**
-		 * Assign a Textfield as a "console" to output the traces to
+		 * Manually assign a Textfield as a "console" to output the traces to (not recommended).  Use TrConsole instead.
 		 */
 		static public function get console():TextField{ return core.console; }
 		
