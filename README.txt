@@ -1,4 +1,4 @@
-# Tr.ace() is a library for formatting and managing trace statements within AS3.
+Tr.ace() is a library for formatting and managing trace statements within AS3.
 
 Tr.ace() is a static Class that uses the Singleton design pattern so you only need to define it's settings once within your application and you're all set.
 
@@ -16,19 +16,24 @@ New in version 2.0 is the TrConsole allowing you to view your traces within a co
 The main functions are:
 
 
-### Tr.ace(...)
-For managing standard trace statements
-
-### Tr.aceArray(...)
-For formatting Arrays when traced
-
-### Tr.aceObject(...)
-For formatting Objects when traced
-
-### Tr.aceMulti(...)
-For formatting multiple arguments
+- Tr.ace(...)
+- For managing standard trace statements
 
 
-[Please view the docs for more information](http://docs.msfx.co.uk/as3/trace/)
+- Tr.aceArray(...)
+- For formatting Arrays when traced
 
-[MSFX Matt Stuttard Parker](http://msfx.co.uk)
+
+- Tr.aceObject(...)
+- For formatting Objects when traced
+
+
+- Tr.aceMulti(...)
+- For formatting multiple arguments
+
+
+Please view the docs for more information - http://docs.msfx.co.uk/as3/trace/
+
+
+MSFX Matt Stuttard Parker
+http://msfx.co.uk
