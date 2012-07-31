@@ -2,6 +2,9 @@
  * Tr.ace() by MSFX Matt Stuttard Parker
  * Version 2.0
  * 10.06.2012
+ *
+ * proposition by Peter Delvaux
+ * 31.07.2012
  * 
  * Copyright (c) MSFX Matt Stuttard Parker
  * 
@@ -31,6 +34,7 @@
  **/
 package uk.msfx.utils.tracing.core
 {
+	import flash.external.ExternalInterface;
 	import flash.text.TextField;
 	import flash.ui.Keyboard;
 	import flash.utils.getQualifiedClassName;
@@ -234,6 +238,8 @@ package uk.msfx.utils.tracing.core
 			// start trace for Object
 			out(prefix + "Begin Object Trace", user, withinClass, arrayAndObjectLinebreaks);
 			
+			// a count variable, if no properties were found, you can display a message.
+			var count:uint;
 			// loop over object tracing each property
 			for (var p:* in output)
 			{
@@ -254,7 +260,13 @@ package uk.msfx.utils.tracing.core
 				{
 					out(prefix + "- [" + p + "] => " + output[p], user, withinClass);
 				}
-				
+				count++;
+			}
+			
+			if(count == 0){
+				// no properties where found.
+				out(prefix + "- No properties where found in: ", user, withinClass, arrayAndObjectLinebreaks);
+				out(prefix + "- " + output, user, withinClass, arrayAndObjectLinebreaks);
 			}
 			
 			// end trace for Object
@@ -305,6 +317,11 @@ package uk.msfx.utils.tracing.core
 					// trace the users output
 					trace(traceStr + output);
 					
+					// if there is an external interface, log to the javascript console.
+					if(ExternalInterface.available){
+						ExternalInterface.call("console.log", traceStr + output);
+					}
+					
 					// update log
 					_log += ((traceStr + output) + String.fromCharCode(Keyboard.ENTER));
 					
@@ -316,6 +333,11 @@ package uk.msfx.utils.tracing.core
 			{
 				// otherwise just trace every users output
 				trace(traceStr + output);
+				
+				// if there is an external interface, log to the javascript console.
+				if(ExternalInterface.available){
+					ExternalInterface.call("console.log", traceStr + output);
+				}
 				
 				// update log
 				//_log += ((traceStr + output) + "\n");
@@ -329,6 +351,10 @@ package uk.msfx.utils.tracing.core
 			if (_useLineBreaks)
 			{
 				trace("");
+				// if there is an external interface, log a linebreak to the javascript console.
+				if(ExternalInterface.available){
+					ExternalInterface.call("console.log", "");
+				}
 				
 				// update log
 				_log += "\n";
@@ -341,6 +367,10 @@ package uk.msfx.utils.tracing.core
 			if (endWithLineBreak) 
 			{
 				trace("");
+				// if there is an external interface, log a linebreak to the javascript console.
+				if(ExternalInterface.available){
+					ExternalInterface.call("console.log", "");
+				}
 				
 				// update log
 				_log += "\n";
